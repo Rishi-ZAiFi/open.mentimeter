@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Latest Release](https://img.shields.io/badge/Release-v1.0.0--Win64-blueviolet?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/your-username/openmenti/releases)
+[![Latest Release](https://img.shields.io/badge/Release-v1.0.0--Win64-blueviolet?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Rishi-ZAiFi/open.mentimeter/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
@@ -12,7 +12,7 @@
 **A free, open-source, local-first alternative to Mentimeter & Kahoot.**  
 *Host high-stakes live MCQ examinations, training assessments, and interactive classroom quizzes without internet, cloud subscriptions, Firebase, or external servers.*
 
-[📦 **Download v1.0.0 (Windows .exe)**](https://github.com/your-username/openmenti/releases/latest) • [⚡ Quick Start](#-quick-start) • [✨ Key Features](#-key-features) • [⚖️ Feature Comparison](#-openmenti-vs-mentimeter-vs-kahoot) • [📝 Question Banks](#-custom-question-banks) • [📊 Excel Export](#-master-excel-export)
+[📦 **Download v1.0.0 (Windows .exe)**](https://github.com/Rishi-ZAiFi/open.mentimeter/releases/latest) • [⚡ Quick Start](#-quick-start) • [✨ Key Features](#-key-features) • [⚖️ Feature Comparison](#-openmenti-vs-mentimeter-vs-kahoot) • [📝 Question Banks](#-custom-question-banks) • [📊 Excel Export](#-master-excel-export)
 
 ---
 
@@ -91,7 +91,7 @@ This will automatically launch the local engine in the background and open your 
 
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/openmenti.git
+git clone https://github.com/Rishi-ZAiFi/open.mentimeter.git
 cd openmenti
 ```
 

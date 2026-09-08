@@ -94,6 +94,43 @@ export default function TrainerLiveQuestion() {
   const answeredCount = liveAnswerCount.answeredCount;
   const isRevealed = questionState === 'revealed' || questionState === 'closed';
 
+  // Global Trainer Keyboard Shortcuts (Space/ArrowRight=Next, R=Reveal, L=Leaderboard, P=Pause/Resume, M=Mute, Q=Q&A)
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't intercept if typing in an input
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      if (e.key === ' ' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextQuestion();
+      } else if (e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        if (!isRevealed) revealAnswer();
+      } else if (e.key === 'l' || e.key === 'L') {
+        e.preventDefault();
+        setViewMode(v => v === 'leaderboard' ? 'question' : 'leaderboard');
+      } else if (e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        sessionStatus === 'paused' ? resumeQuiz() : pauseQuiz();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        handleToggleMute();
+      } else if (e.key === 'q' || e.key === 'Q') {
+        e.preventDefault();
+        setIsQAOpen(prev => !prev);
+      } else if (e.key >= '1' && e.key <= '9') {
+        const targetQ = parseInt(e.key, 10) - 1;
+        if (targetQ < totalQuestions) {
+          e.preventDefault();
+          jumpToQuestion(targetQ);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isRevealed, sessionStatus, totalQuestions, nextQuestion, revealAnswer, pauseQuiz, resumeQuiz, jumpToQuestion]);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8 animate-fade-in">
       

@@ -278,5 +278,15 @@
     "explanation": "Few-shot prompting provides exemplars demonstrating expected pattern, format, and edge cases to guide the LLM's response accuracy.",
     "difficulty": "Medium",
     "category": "AI Fundamentals"
+  },
+  {
+    "id": 21,
+    "type": "wordcloud",
+    "question": "What is the #1 superpower or tool you learned in today's Digi Warriors training?",
+    "options": [],
+    "correctAnswer": 0,
+    "explanation": "Word clouds gather live audience sentiment, key takeaways, and reflection words in real-time.",
+    "difficulty": "Reflection",
+    "category": "Course Reflection"
   }
 ]
