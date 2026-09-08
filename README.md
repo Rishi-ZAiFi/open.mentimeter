@@ -2,9 +2,9 @@
 
 # OpenMenti
 
-**Local-first interactive polling, quizzes, and live audience Q&A.**
+**Open source Mentimeter alternative.**
 
-An open-source presentation and assessment platform designed to run entirely over local networks with zero cloud dependencies.
+A local-first presentation and live assessment platform designed to run entirely over local networks with zero cloud dependencies.
 
 </div>
 
