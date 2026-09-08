@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
+import ReactionActionBar from '../common/ReactionActionBar';
+import QAModal from '../common/QAModal';
 import { CheckCircle2, XCircle, Trophy, Lightbulb, Zap, ArrowUp, ArrowDown, Minus } from 'lucide-react';
 
 export default function ParticipantResultScreen() {
@@ -9,8 +11,11 @@ export default function ParticipantResultScreen() {
     selectedOption, 
     currentQuestion, 
     participantName,
-    leaderboard
+    leaderboard,
+    qaQuestions = []
   } = useQuiz();
+
+  const [isQAOpen, setIsQAOpen] = useState(false);
 
   const optionLetters = ['A', 'B', 'C', 'D'];
   const correctAnswer = revealData?.correctAnswer ?? currentQuestion?.correctAnswer;
@@ -179,9 +184,15 @@ export default function ParticipantResultScreen() {
       )}
 
       {/* Waiting Indicator */}
-      <div className="text-center pt-1 text-[11px] text-slate-400 animate-pulse">
+      <div className="text-center pt-1 pb-16 text-[11px] text-slate-400 animate-pulse">
         Waiting for trainer to move to next question...
       </div>
+
+      {/* Floating Reaction Bar & Q&A */}
+      <ReactionActionBar onOpenQA={() => setIsQAOpen(true)} qaCount={qaQuestions.length} />
+
+      {/* Audience Q&A Modal */}
+      <QAModal isOpen={isQAOpen} onClose={() => setIsQAOpen(false)} />
 
     </div>
   );

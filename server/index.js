@@ -381,7 +381,9 @@ io.on('connection', (socket) => {
         timerInterval: null,
         questions: questionSet,
         participants: [],
-        completedQuestions: []
+        completedQuestions: [],
+        qaQuestions: [],
+        wordCloudSubmissions: {}
       };
 
       sessions.set(code, newSession);
@@ -970,6 +972,108 @@ io.on('connection', (socket) => {
     });
   });
 
+  // Real-Time Floating Emoji Reactions
+  socket.on('send_reaction', ({ sessionCode, emoji, senderName }) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !emoji) return;
+
+    io.to(session.code).emit('reaction_received', {
+      id: `${Date.now()}-${Math.random()}`,
+      emoji,
+      senderName: senderName || 'Anonymous',
+      timestamp: Date.now()
+    });
+  });
+
+  // Live Audience Q&A - Submit Question
+  socket.on('submit_qa_question', ({ sessionCode, text, authorName, authorPhone }, callback) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !text) return callback && callback({ success: false, error: 'Session or text invalid' });
+
+    if (!session.qaQuestions) session.qaQuestions = [];
+
+    const newQA = {
+      id: `qa-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      text: text.trim(),
+      authorName: authorName || 'Anonymous',
+      authorPhone: authorPhone || '',
+      upvotes: 0,
+      upvotedBy: [],
+      answered: false,
+      timestamp: Date.now()
+    };
+
+    session.qaQuestions.push(newQA);
+    io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
+
+    if (callback) callback({ success: true, question: newQA });
+  });
+
+  // Live Audience Q&A - Upvote Question
+  socket.on('upvote_qa_question', ({ sessionCode, questionId, userPhone }, callback) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !session.qaQuestions) return callback && callback({ success: false });
+
+    const q = session.qaQuestions.find(item => item.id === questionId);
+    if (q) {
+      const userKey = userPhone || socket.id;
+      if (!q.upvotedBy) q.upvotedBy = [];
+
+      if (!q.upvotedBy.includes(userKey)) {
+        q.upvotedBy.push(userKey);
+        q.upvotes = (q.upvotes || 0) + 1;
+      } else {
+        q.upvotedBy = q.upvotedBy.filter(k => k !== userKey);
+        q.upvotes = Math.max(0, (q.upvotes || 0) - 1);
+      }
+
+      io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
+      if (callback) callback({ success: true, upvotes: q.upvotes });
+    }
+  });
+
+  // Live Audience Q&A - Toggle Answered
+  socket.on('toggle_qa_answered', ({ sessionCode, questionId }, callback) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !session.qaQuestions) return callback && callback({ success: false });
+
+    const q = session.qaQuestions.find(item => item.id === questionId);
+    if (q) {
+      q.answered = !q.answered;
+      io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
+      if (callback) callback({ success: true, answered: q.answered });
+    }
+  });
+
+  // Live Word Cloud Submission
+  socket.on('submit_word_cloud', ({ sessionCode, word, questionIndex, participantPhone }, callback) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !word) return callback && callback({ success: false });
+
+    if (!session.wordCloudSubmissions) session.wordCloudSubmissions = {};
+    const qIdx = questionIndex !== undefined ? questionIndex : session.currentQuestionIndex;
+
+    if (!session.wordCloudSubmissions[qIdx]) {
+      session.wordCloudSubmissions[qIdx] = [];
+    }
+
+    session.wordCloudSubmissions[qIdx].push({
+      text: word.trim(),
+      phone: participantPhone || '',
+      timestamp: Date.now()
+    });
+
+    const currentWords = session.wordCloudSubmissions[qIdx];
+
+    io.to(session.code).emit('word_cloud_updated', {
+      questionIndex: qIdx,
+      words: currentWords,
+      totalResponses: currentWords.length
+    });
+
+    if (callback) callback({ success: true, words: currentWords });
+  });
+
   // Request live session state
   socket.on('get_session_state', ({ sessionCode, participantName, participantPhone, role }, callback) => {
     const code = (sessionCode || '').toUpperCase().trim();
@@ -1038,6 +1142,8 @@ io.on('connection', (socket) => {
         answeredCount,
         totalParticipants: session.participants.length
       },
+      qaQuestions: session.qaQuestions || [],
+      wordCloudWords: (session.wordCloudSubmissions && session.wordCloudSubmissions[session.currentQuestionIndex]) || [],
       analytics
     };
 

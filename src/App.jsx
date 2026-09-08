@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QuizProvider, useQuiz } from './context/QuizContext';
 import Header from './components/common/Header';
 import RoleSelection from './components/auth/RoleSelection';
@@ -7,14 +7,34 @@ import ParticipantLogin from './components/auth/ParticipantLogin';
 import TrainerDashboard from './components/trainer/TrainerDashboard';
 import TrainerLiveQuestion from './components/trainer/TrainerLiveQuestion';
 import TrainerFinalResults from './components/trainer/TrainerFinalResults';
+import TrainerRemote from './components/trainer/TrainerRemote';
 import ParticipantWaitingRoom from './components/participant/ParticipantWaitingRoom';
 import ParticipantQuestionScreen from './components/participant/ParticipantQuestionScreen';
 import ParticipantResultScreen from './components/participant/ParticipantResultScreen';
 import ParticipantFinalScreen from './components/participant/ParticipantFinalScreen';
 
 function MainApp() {
-  const { role, sessionStatus, questionState } = useQuiz();
-  const [selectedRolePrompt, setSelectedRolePrompt] = useState(null); // 'trainer' | 'participant' | null
+  const { role, setRole, sessionStatus, questionState, sessionCode, setSessionCode } = useQuiz();
+  const [selectedRolePrompt, setSelectedRolePrompt] = useState(null); // 'trainer' | 'participant' | 'remote' | null
+
+  // Check URL parameters for remote mode
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paramRole = params.get('role');
+    const paramSession = params.get('session');
+
+    if (paramRole === 'remote') {
+      setRole('remote');
+      if (paramSession) {
+        setSessionCode(paramSession);
+      }
+    }
+  }, [setRole, setSessionCode]);
+
+  // Flow 0: Remote Mode (Mentimote)
+  if (role === 'remote') {
+    return <TrainerRemote />;
+  }
 
   // Flow 1: No role selected or not authenticated yet
   if (!role) {

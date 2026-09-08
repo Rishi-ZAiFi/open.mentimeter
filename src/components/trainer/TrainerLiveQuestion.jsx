@@ -4,6 +4,11 @@ import ProgressBar from '../common/ProgressBar';
 import TimerDisplay from '../common/TimerDisplay';
 import TrainerDistribution from './TrainerDistribution';
 import TrainerLeaderboard from './TrainerLeaderboard';
+import WordCloudDisplay from './WordCloudDisplay';
+import FloatingReactions from '../common/FloatingReactions';
+import QAModal from '../common/QAModal';
+import { soundFX } from '../../services/soundEffects';
+import { QRCodeSVG } from 'qrcode.react';
 import { 
   Eye, 
   ArrowRight, 
@@ -14,7 +19,13 @@ import {
   CheckCircle2, 
   HelpCircle,
   Maximize2,
-  Tag
+  Tag,
+  MessageSquare,
+  Smartphone,
+  Volume2,
+  VolumeX,
+  QrCode as QrIcon,
+  X
 } from 'lucide-react';
 
 export default function TrainerLiveQuestion() {
@@ -31,6 +42,10 @@ export default function TrainerLiveQuestion() {
     participants,
     leaderboard,
     sessionStatus,
+    sessionCode,
+    serverInfo,
+    qaQuestions = [],
+    wordCloudWords = [],
     revealAnswer,
     nextQuestion,
     jumpToQuestion,
@@ -40,6 +55,20 @@ export default function TrainerLiveQuestion() {
   } = useQuiz();
 
   const [viewMode, setViewMode] = useState('question'); // 'question' | 'leaderboard'
+  const [isQAOpen, setIsQAOpen] = useState(false);
+  const [isRemoteModalOpen, setIsRemoteModalOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(() => soundFX.isMuted());
+
+  const handleToggleMute = () => {
+    const muted = soundFX.toggleMute();
+    setIsMuted(muted);
+  };
+
+  const remoteUrl = `${serverInfo.joinUrl || window.location.origin}/?role=remote&session=${sessionCode}`;
+
+  const handleOpenRemoteModal = () => {
+    setIsRemoteModalOpen(true);
+  };
 
   if (!currentQuestion) {
     return (
@@ -98,6 +127,39 @@ export default function TrainerLiveQuestion() {
         {/* Right: Timer & Live Submission Pill */}
         <div className="flex items-center gap-3 self-end sm:self-auto">
           
+          {/* Live Q&A Button */}
+          <button
+            onClick={() => setIsQAOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/30 text-xs font-semibold transition-colors"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Q&A</span>
+            {qaQuestions.length > 0 && (
+              <span className="px-1.5 py-0.2 rounded-full bg-blue-600 text-white text-[10px] font-bold">
+                {qaQuestions.length}
+              </span>
+            )}
+          </button>
+
+          {/* Mentimote Mobile Remote Trigger */}
+          <button
+            onClick={handleOpenRemoteModal}
+            title="Open Mentimote Mobile Remote"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium transition-colors"
+          >
+            <Smartphone className="w-3.5 h-3.5 text-blue-400" />
+            <span className="hidden md:inline">Phone Remote</span>
+          </button>
+
+          {/* Audio FX Toggle */}
+          <button
+            onClick={handleToggleMute}
+            title={isMuted ? "Unmute Sound FX" : "Mute Sound FX"}
+            className="p-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
+          >
+            {isMuted ? <VolumeX className="w-4 h-4 text-slate-500" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+          </button>
+
           {/* Live Responses Counter */}
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300">
             <Users className="w-3.5 h-3.5 text-emerald-400" />
@@ -140,6 +202,11 @@ export default function TrainerLiveQuestion() {
         <TrainerLeaderboard
           leaderboard={leaderboard}
           onClose={() => setViewMode('question')}
+        />
+      ) : currentQuestion.type === 'wordcloud' ? (
+        <WordCloudDisplay
+          words={wordCloudWords}
+          totalResponses={wordCloudWords.length}
         />
       ) : (
         <div className="space-y-6">
@@ -250,6 +317,44 @@ export default function TrainerLiveQuestion() {
         </div>
 
       </div>
+
+      {/* Real-Time Floating Emojis Overlay on Projector Screen */}
+      <FloatingReactions />
+
+      {/* Audience Q&A Modal */}
+      <QAModal isOpen={isQAOpen} onClose={() => setIsQAOpen(false)} />
+
+      {/* Mentimote Remote QR Modal */}
+      {isRemoteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl relative">
+            <button
+              onClick={() => setIsRemoteModalOpen(false)}
+              type="button"
+              className="absolute top-4 right-4 p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="w-12 h-12 rounded-2xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <Smartphone className="w-6 h-6" />
+            </div>
+
+            <h3 className="text-lg font-black text-white">Presenter Mobile Remote</h3>
+            <p className="text-xs text-slate-400 mt-1 mb-4">
+              Scan with your phone to control slides, timer, and view speaker notes while walking the room!
+            </p>
+
+            <div className="bg-white p-3.5 rounded-2xl inline-block shadow-xl mb-4">
+              <QRCodeSVG value={remoteUrl} size={190} level="H" includeMargin={true} />
+            </div>
+
+            <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-300 break-all select-all">
+              {remoteUrl}
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
 import ProgressBar from '../common/ProgressBar';
 import TimerDisplay from '../common/TimerDisplay';
+import ReactionActionBar from '../common/ReactionActionBar';
+import QAModal from '../common/QAModal';
+import WordCloudInput from './WordCloudInput';
 import { CheckCircle2, Lock, Clock, Pause, Zap } from 'lucide-react';
 
 export default function ParticipantQuestionScreen() {
@@ -16,8 +19,11 @@ export default function ParticipantQuestionScreen() {
     submitAnswer,
     sessionStatus,
     speedBonusEnabled,
-    showTopic
+    showTopic,
+    qaQuestions = []
   } = useQuiz();
+
+  const [isQAOpen, setIsQAOpen] = useState(false);
 
   if (!currentQuestion) {
     return (
@@ -105,70 +111,82 @@ export default function ParticipantQuestionScreen() {
           </div>
         )}
 
-        {/* Large Readable Question Card */}
-        <div className="p-5 sm:p-7 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl mb-4 sm:mb-6">
-          <h2 className="text-base sm:text-xl md:text-2xl font-black text-white leading-snug tracking-tight">
-            {currentQuestion.question}
-          </h2>
-        </div>
+        {currentQuestion.type === 'wordcloud' ? (
+          <WordCloudInput question={currentQuestion} />
+        ) : (
+          <>
+            {/* Large Readable Question Card */}
+            <div className="p-5 sm:p-7 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl mb-4 sm:mb-6">
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-white leading-snug tracking-tight">
+                {currentQuestion.question}
+              </h2>
+            </div>
 
-        {/* 4 Large Touch-Optimized Option Buttons with Dynamic Varied Colors */}
-        <div className="grid grid-cols-1 gap-3">
-          {currentQuestion.options?.map((opt, idx) => {
-            const isSelected = selectedOption === idx;
-            const themeIndex = (idx + qSeed) % optionThemes.length;
-            const theme = optionThemes[themeIndex];
+            {/* 4 Large Touch-Optimized Option Buttons with Dynamic Varied Colors */}
+            <div className="grid grid-cols-1 gap-3">
+              {currentQuestion.options?.map((opt, idx) => {
+                const isSelected = selectedOption === idx;
+                const themeIndex = (idx + qSeed) % optionThemes.length;
+                const theme = optionThemes[themeIndex];
 
-            return (
-              <button
-                key={idx}
-                type="button"
-                disabled={isAnswerSubmitted || sessionStatus === 'paused'}
-                onClick={() => submitAnswer(idx)}
-                style={{ touchAction: 'manipulation' }}
-                className={`relative w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-150 flex items-center gap-3.5 sm:gap-4 ${
-                  isSelected
-                    ? theme.activeCard
-                    : isAnswerSubmitted
-                    ? 'bg-slate-950/40 border-slate-800/80 text-slate-500 cursor-not-allowed opacity-50'
-                    : `${theme.card} text-slate-100 active:scale-[0.98]`
-                }`}
-              >
-                {/* Option Letter Badge */}
-                <div
-                  className={`w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center font-black text-sm sm:text-base shadow-md flex-shrink-0 transition-transform ${
-                    isSelected ? theme.activeBadge : theme.badge
-                  }`}
-                >
-                  {optionLetters[idx]}
-                </div>
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    disabled={isAnswerSubmitted || sessionStatus === 'paused'}
+                    onClick={() => submitAnswer(idx)}
+                    style={{ touchAction: 'manipulation' }}
+                    className={`relative w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-150 flex items-center gap-3.5 sm:gap-4 ${
+                      isSelected
+                        ? theme.activeCard
+                        : isAnswerSubmitted
+                        ? 'bg-slate-950/40 border-slate-800/80 text-slate-500 cursor-not-allowed opacity-50'
+                        : `${theme.card} text-slate-100 active:scale-[0.98]`
+                    }`}
+                  >
+                    {/* Option Letter Badge */}
+                    <div
+                      className={`w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center font-black text-sm sm:text-base shadow-md flex-shrink-0 transition-transform ${
+                        isSelected ? theme.activeBadge : theme.badge
+                      }`}
+                    >
+                      {optionLetters[idx]}
+                    </div>
 
-                {/* Option Text */}
-                <span className={`text-sm sm:text-base font-bold leading-snug flex-1 ${
-                  isSelected ? 'text-white' : 'text-slate-100'
-                }`}>
-                  {opt}
-                </span>
+                    {/* Option Text */}
+                    <span className={`text-sm sm:text-base font-bold leading-snug flex-1 ${
+                      isSelected ? 'text-white' : 'text-slate-100'
+                    }`}>
+                      {opt}
+                    </span>
 
-                {/* Selected Checkmark */}
-                {isSelected && (
-                  <CheckCircle2 className="w-6 h-6 text-white flex-shrink-0 animate-scale-in" />
-                )}
-              </button>
-            );
-          })}
-        </div>
+                    {/* Selected Checkmark */}
+                    {isSelected && (
+                      <CheckCircle2 className="w-6 h-6 text-white flex-shrink-0 animate-scale-in" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Answer Submitted Sticky Feedback */}
-      {isAnswerSubmitted && (
-        <div className="mt-6 p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 flex items-center justify-center gap-2.5 animate-slide-up shadow-xl">
+      {isAnswerSubmitted && currentQuestion.type !== 'wordcloud' && (
+        <div className="mt-6 mb-16 p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 flex items-center justify-center gap-2.5 animate-slide-up shadow-xl">
           <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
           <span className="font-extrabold text-xs sm:text-sm">
             Answer submitted ✓ &bull; Waiting for results...
           </span>
         </div>
       )}
+
+      {/* Real-Time Reaction Bar & Q&A Trigger */}
+      <ReactionActionBar onOpenQA={() => setIsQAOpen(true)} qaCount={qaQuestions.length} />
+
+      {/* Audience Q&A Modal */}
+      <QAModal isOpen={isQAOpen} onClose={() => setIsQAOpen(false)} />
 
     </div>
   );

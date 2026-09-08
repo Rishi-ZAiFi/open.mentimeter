@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { socket } from '../services/socket';
+import { soundFX } from '../services/soundEffects';
 import defaultQuestionsData from '../data/questions.json';
 
 const QuizContext = createContext();
@@ -24,6 +25,11 @@ export function QuizProvider({ children }) {
   const [participants, setParticipants] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+  
+  // Real-time Mentimeter-inspired interaction state
+  const [reactions, setReactions] = useState([]);
+  const [qaQuestions, setQaQuestions] = useState([]);
+  const [wordCloudWords, setWordCloudWords] = useState([]);
   
   // Participant-specific state
   const [selectedOption, setSelectedOption] = useState(null);
@@ -120,6 +126,14 @@ export function QuizProvider({ children }) {
         if (res.lastAnswerResult) {
           setLastAnswerResult(res.lastAnswerResult);
         }
+
+        if (res.qaQuestions) {
+          setQaQuestions(res.qaQuestions);
+        }
+
+        if (res.wordCloudWords) {
+          setWordCloudWords(res.wordCloudWords);
+        }
       }
     });
   }, [sessionCode, participantName, participantPhone, role]);
@@ -156,29 +170,27 @@ export function QuizProvider({ children }) {
       }
     };
 
-    const handleTimerTick = ({ timeRemaining: t }) => {
-      setTimeRemaining(t);
+    const handleTimerTick = ({ timeRemaining: tr }) => {
+      setTimeRemaining(tr);
+      if (tr <= 5 && tr > 0) {
+        soundFX.playHurry();
+      }
     };
 
-    const handleTrainerQuestion = (q) => {
-      setCurrentQuestion(q);
-      setCurrentQuestionIndex(q.index);
-      setTotalQuestions(q.total);
+    const handleTrainerQuestion = (data) => {
+      setCurrentQuestion(data);
       setQuestionState('active');
-      setRevealData(null);
-      setLiveAnswerCount({ answeredCount: 0, totalParticipants: participants.length });
+      setWordCloudWords([]);
     };
 
-    const handleParticipantQuestion = (q) => {
-      setCurrentQuestion(q);
-      setCurrentQuestionIndex(q.index);
-      setTotalQuestions(q.total);
+    const handleParticipantQuestion = (data) => {
+      setCurrentQuestion(data);
       setQuestionState('active');
       setSelectedOption(null);
       setIsAnswerSubmitted(false);
       setLastAnswerResult(null);
-      setRevealData(null);
       setQuestionStartTime(Date.now());
+      setWordCloudWords([]);
     };
 
     const handleQuestionChanged = ({ currentQuestionIndex: idx, totalQuestions: total }) => {
@@ -189,6 +201,7 @@ export function QuizProvider({ children }) {
       setIsAnswerSubmitted(false);
       setLastAnswerResult(null);
       setRevealData(null);
+      setWordCloudWords([]);
     };
 
     const handleLiveAnswerCount = (data) => {
@@ -201,6 +214,7 @@ export function QuizProvider({ children }) {
     const handleAnswerRevealed = (data) => {
       setQuestionState('revealed');
       setRevealData(data);
+      soundFX.playCorrect();
       if (data.leaderboard) {
         setLeaderboard(data.leaderboard);
       }
@@ -208,6 +222,7 @@ export function QuizProvider({ children }) {
 
     const handleDisplayLeaderboard = (data) => {
       setLeaderboard(data.leaderboard || []);
+      soundFX.playDrumroll();
     };
 
     const handleQuizPaused = () => {
@@ -221,6 +236,7 @@ export function QuizProvider({ children }) {
     const handleQuizFinished = (data) => {
       setSessionStatus('finished');
       setQuestionState('closed');
+      soundFX.playFanfare();
       if (data.analytics) setAnalytics(data.analytics);
       if (data.leaderboard) setLeaderboard(data.leaderboard);
     };
@@ -235,6 +251,7 @@ export function QuizProvider({ children }) {
       setRevealData(null);
       setAnalytics(null);
       setLeaderboard([]);
+      setWordCloudWords([]);
       if (data.participants) {
         setParticipants(data.participants);
       }
@@ -246,6 +263,18 @@ export function QuizProvider({ children }) {
 
     const handleTopicVisibilityChanged = ({ showTopic: st }) => {
       setShowTopic(st);
+    };
+
+    const handleReactionReceived = (reaction) => {
+      setReactions(prev => [...prev.slice(-40), reaction]);
+    };
+
+    const handleQAUpdated = ({ qaQuestions: qa }) => {
+      setQaQuestions(qa || []);
+    };
+
+    const handleWordCloudUpdated = ({ words }) => {
+      setWordCloudWords(words || []);
     };
 
     socket.on('connect', handleConnect);
@@ -265,6 +294,9 @@ export function QuizProvider({ children }) {
     socket.on('quiz_restarted', handleQuizRestarted);
     socket.on('sessions_cleared', handleSessionsCleared);
     socket.on('topic_visibility_changed', handleTopicVisibilityChanged);
+    socket.on('reaction_received', handleReactionReceived);
+    socket.on('qa_questions_updated', handleQAUpdated);
+    socket.on('word_cloud_updated', handleWordCloudUpdated);
 
     if (socket.connected) {
       syncStateWithServer();
@@ -288,6 +320,9 @@ export function QuizProvider({ children }) {
       socket.off('quiz_restarted', handleQuizRestarted);
       socket.off('sessions_cleared', handleSessionsCleared);
       socket.off('topic_visibility_changed', handleTopicVisibilityChanged);
+      socket.off('reaction_received', handleReactionReceived);
+      socket.off('qa_questions_updated', handleQAUpdated);
+      socket.off('word_cloud_updated', handleWordCloudUpdated);
     };
   }, [sessionCode, participantName, participantPhone, role, syncStateWithServer]);
 
@@ -476,6 +511,60 @@ export function QuizProvider({ children }) {
     localStorage.removeItem('dw_session_code');
   }, []);
 
+  const sendReaction = useCallback((emoji) => {
+    if (!sessionCode || !emoji) return;
+    socket.emit('send_reaction', {
+      sessionCode,
+      emoji,
+      senderName: participantName || trainerName || 'Anonymous'
+    });
+  }, [sessionCode, participantName, trainerName]);
+
+  const submitQAQuestion = useCallback((text) => {
+    return new Promise((resolve) => {
+      if (!sessionCode || !text) return resolve(false);
+      socket.emit('submit_qa_question', {
+        sessionCode,
+        text,
+        authorName: participantName || trainerName || 'Anonymous',
+        authorPhone: participantPhone || ''
+      }, (res) => {
+        resolve(res && res.success);
+      });
+    });
+  }, [sessionCode, participantName, participantPhone, trainerName]);
+
+  const upvoteQAQuestion = useCallback((questionId) => {
+    if (!sessionCode || !questionId) return;
+    socket.emit('upvote_qa_question', {
+      sessionCode,
+      questionId,
+      userPhone: participantPhone || ''
+    });
+  }, [sessionCode, participantPhone]);
+
+  const toggleQAAnswered = useCallback((questionId) => {
+    if (!sessionCode || !questionId) return;
+    socket.emit('toggle_qa_answered', {
+      sessionCode,
+      questionId
+    });
+  }, [sessionCode]);
+
+  const submitWordCloud = useCallback((word) => {
+    return new Promise((resolve) => {
+      if (!sessionCode || !word) return resolve(false);
+      socket.emit('submit_word_cloud', {
+        sessionCode,
+        word,
+        questionIndex: currentQuestionIndex,
+        participantPhone: participantPhone || ''
+      }, (res) => {
+        resolve(res && res.success);
+      });
+    });
+  }, [sessionCode, currentQuestionIndex, participantPhone]);
+
   const clearDatabase = useCallback(async () => {
     try {
       await fetch('/api/reset', { method: 'POST' });
@@ -508,6 +597,9 @@ export function QuizProvider({ children }) {
       participants,
       leaderboard,
       analytics,
+      reactions,
+      qaQuestions,
+      wordCloudWords,
       selectedOption,
       isAnswerSubmitted,
       lastAnswerResult,
@@ -530,6 +622,11 @@ export function QuizProvider({ children }) {
       resumeQuiz,
       restartQuiz,
       toggleTopicVisibility,
+      sendReaction,
+      submitQAQuestion,
+      upvoteQAQuestion,
+      toggleQAAnswered,
+      submitWordCloud,
       resetToHome,
       clearDatabase
     }}>

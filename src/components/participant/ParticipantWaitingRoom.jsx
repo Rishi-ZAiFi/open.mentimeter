@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
+import ReactionActionBar from '../common/ReactionActionBar';
+import QAModal from '../common/QAModal';
 import { Sparkles, CheckCircle2, Users, Wifi, UserCheck } from 'lucide-react';
 
 export default function ParticipantWaitingRoom() {
-  const { participantName, sessionCode, participants } = useQuiz();
+  const { participantName, sessionCode, participants, qaQuestions = [] } = useQuiz();
+  const [isQAOpen, setIsQAOpen] = useState(false);
 
   const otherPeers = participants.filter(p => p.name.toLowerCase() !== participantName.toLowerCase());
 
@@ -76,10 +79,16 @@ export default function ParticipantWaitingRoom() {
 
       </div>
 
-      <div className="mt-6 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
+      <div className="mt-6 mb-16 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
         <Wifi className="w-3.5 h-3.5 text-emerald-400" />
         <span>Live local connection active &bull; Keep this screen open</span>
       </div>
+
+      {/* Floating Reaction Bar & Q&A */}
+      <ReactionActionBar onOpenQA={() => setIsQAOpen(true)} qaCount={qaQuestions.length} />
+
+      {/* Audience Q&A Modal */}
+      <QAModal isOpen={isQAOpen} onClose={() => setIsQAOpen(false)} />
 
     </div>
   );

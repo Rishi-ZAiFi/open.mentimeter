@@ -5,7 +5,7 @@
       "phone": "9876500001",
       "name": "Theja Clone",
       "createdAt": "2026-09-08T12:22:15.542Z",
-      "updatedAt": "2026-09-08T12:36:55.619Z",
+      "updatedAt": "2026-09-08T12:57:14.888Z",
       "totalQuizzes": 1,
       "totalScore": 2647,
       "avgAccuracy": 95,
@@ -593,6 +593,28 @@
       "totalScore": 0,
       "avgAccuracy": 0,
       "history": []
+    },
+    {
+      "id": "stu-1788872273989-jzft",
+      "phone": "9876560593",
+      "name": "Arun",
+      "createdAt": "2026-09-08T12:57:53.989Z",
+      "updatedAt": "2026-09-08T12:57:53.989Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
+    },
+    {
+      "id": "stu-1788872274002-tfrd",
+      "phone": "9876539310",
+      "name": "Priya",
+      "createdAt": "2026-09-08T12:57:54.002Z",
+      "updatedAt": "2026-09-08T12:57:54.002Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
     }
   ],
   "sessions": [
@@ -620,6 +642,17 @@
     },
     {
       "id": "sess-DW-DAY2-1788871018100",
+      "code": "DW-DAY2",
+      "title": "Digi Warriors Technical Assessment",
+      "trainerName": "Lead Trainer",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "totalParticipants": 1,
+      "avgScore": 143,
+      "avgAccuracy": 5
+    },
+    {
+      "id": "sess-DW-DAY2-1788872237335",
       "code": "DW-DAY2",
       "title": "Digi Warriors Technical Assessment",
       "trainerName": "Lead Trainer",
@@ -969,6 +1002,32 @@
       "id": "res-DW-DAY2-stu-1000-1788871018101",
       "studentId": "stu-1000",
       "studentPhone": "9876500001",
+      "studentName": "Theja Gorrepati (Updated)",
+      "sessionCode": "DW-DAY2",
+      "quizTitle": "Digi Warriors Technical Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 1,
+      "score": 143,
+      "accuracy": 5,
+      "rank": 1,
+      "answersDetail": [
+        {
+          "questionIndex": 0,
+          "questionId": 1,
+          "question": "Which Excel formula is modern, dynamic, and replaces both VLOOKUP and HLOOKUP without requiring an exact column index number?",
+          "category": "Lookup Functions",
+          "selectedOption": 3,
+          "isCorrect": true,
+          "pointsEarned": 143,
+          "responseTimeMs": 2000
+        }
+      ]
+    },
+    {
+      "id": "res-DW-DAY2-stu-1000-1788872237336",
+      "studentId": "stu-1000",
+      "studentPhone": "9876500001",
       "studentName": "Theja Clone",
       "sessionCode": "DW-DAY2",
       "quizTitle": "Digi Warriors Technical Assessment",
@@ -1001,6 +1060,15 @@
       "lastActive": "2026-09-08T12:49:48.034Z",
       "totalSessions": 4,
       "sessionCode": "TR-RECON-1"
+    },
+    {
+      "id": "tr-1788872234808-3tne",
+      "name": "Lead Trainer",
+      "title": "Technical Trainer",
+      "createdAt": "2026-09-08T12:57:14.808Z",
+      "lastActive": "2026-09-08T12:57:53.968Z",
+      "totalSessions": 2,
+      "sessionCode": "DW-9999"
     }
   ]
 }

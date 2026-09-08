@@ -67,3 +67,32 @@
 .option-badge-d {
   @apply bg-rose-600 text-white;
 }
+
+@keyframes floatingReaction {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translateY(-40px) scale(1.15) rotate(-5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-240px) translateX(calc(var(--drift, 0px) * 0.5)) scale(1.05) rotate(6deg);
+    opacity: 0.9;
+  }
+  85% {
+    transform: translateY(-500px) translateX(var(--drift, 0px)) scale(0.95) rotate(-4deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-750px) translateX(calc(var(--drift, 0px) * 1.2)) scale(0.7) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+.animate-floating-reaction {
+  animation-name: floatingReaction;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  animation-fill-mode: forwards;
+}

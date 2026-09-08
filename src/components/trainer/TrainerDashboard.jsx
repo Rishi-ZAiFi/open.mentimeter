@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { Play, Users, Clock, Zap, FileText, QrCode, Sparkles, CheckCircle, Copy, Check } from 'lucide-react';
+import { Play, Users, Clock, Zap, FileText, QrCode, Sparkles, CheckCircle, Copy, Check, Smartphone } from 'lucide-react';
 import QRCodeModal from '../common/QRCodeModal';
+import FloatingReactions from '../common/FloatingReactions';
 
 export default function TrainerDashboard() {
   const { 
@@ -19,6 +20,7 @@ export default function TrainerDashboard() {
   const [copied, setCopied] = useState(false);
 
   const joinUrl = `${serverInfo.joinUrl}?code=${sessionCode}`;
+  const remoteUrl = `${serverInfo.joinUrl}?role=remote&session=${sessionCode}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(joinUrl);
@@ -227,6 +229,7 @@ export default function TrainerDashboard() {
       </div>
 
       {showQr && <QRCodeModal onClose={() => setShowQr(false)} />}
+      <FloatingReactions />
     </div>
   );
 }

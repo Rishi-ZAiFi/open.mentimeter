@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck } from 'lucide-react';
+import { soundFX } from '../../services/soundEffects';
+import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck, Volume2, VolumeX } from 'lucide-react';
 import QRCodeModal from './QRCodeModal';
 import StudentProfileModal from '../profile/StudentProfileModal';
 import StudentDirectory from '../trainer/StudentDirectory';
@@ -22,6 +23,7 @@ export default function Header() {
   const [showQrModal, setShowQrModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showDirectoryModal, setShowDirectoryModal] = useState(false);
+  const [isMuted, setIsMuted] = useState(() => soundFX.isMuted());
 
   // Status Badge configurations
   const getStatusBadge = () => {
@@ -130,6 +132,18 @@ export default function Header() {
                 <QrCode className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             )}
+
+            {/* Sound FX Toggle */}
+            <button
+              onClick={() => {
+                soundFX.toggleMute();
+                setIsMuted(soundFX.isMuted());
+              }}
+              title={isMuted ? "Unmute Audio FX" : "Mute Audio FX"}
+              className="p-1.5 sm:p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-colors"
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
+            </button>
 
             {/* Connection Dot */}
             <div className="flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded-md bg-slate-900/50 text-xs text-slate-400" title={connected ? 'Connected to Local Real-Time Server' : 'Offline'}>
