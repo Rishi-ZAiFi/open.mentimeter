@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
 import { soundFX } from '../../services/soundEffects';
-import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck, Volume2, VolumeX } from 'lucide-react';
+import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck, Volume2, VolumeX, Settings } from 'lucide-react';
 import QRCodeModal from './QRCodeModal';
 import StudentProfileModal from '../profile/StudentProfileModal';
 import StudentDirectory from '../trainer/StudentDirectory';
+import TrainerProfileModal from '../trainer/TrainerProfileModal';
 
 export default function Header() {
   const { 
@@ -23,6 +24,7 @@ export default function Header() {
   const [showQrModal, setShowQrModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showDirectoryModal, setShowDirectoryModal] = useState(false);
+  const [showTrainerSettings, setShowTrainerSettings] = useState(false);
   const [isMuted, setIsMuted] = useState(() => soundFX.isMuted());
 
   // Status Badge configurations
@@ -98,6 +100,18 @@ export default function Header() {
           {/* Right Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2.5">
             
+            {/* Trainer: Settings & Themes */}
+            {role === 'trainer' && (
+              <button
+                onClick={() => setShowTrainerSettings(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-600/15 border border-purple-500/30 hover:bg-purple-600/25 text-purple-400 text-xs font-bold transition-colors"
+                title="Presentation Themes, Timer Presets & Privacy Settings"
+              >
+                <Settings className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">Settings & Themes</span>
+              </button>
+            )}
+
             {/* Trainer: Student Directory */}
             {role === 'trainer' && (
               <button
@@ -205,6 +219,13 @@ export default function Header() {
 
       {showDirectoryModal && (
         <StudentDirectory onClose={() => setShowDirectoryModal(false)} />
+      )}
+
+      {showTrainerSettings && (
+        <TrainerProfileModal
+          isOpen={showTrainerSettings}
+          onClose={() => setShowTrainerSettings(false)}
+        />
       )}
     </>
   );
