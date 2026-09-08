@@ -59,10 +59,14 @@ Commercial tools like Mentimeter, Kahoot, Slido, and Quizizz are great—until y
 | :--- | :--- |
 | 📴 **100% Local-First & Offline** | Air-gapped operation. Run assessments in basements, auditoriums, or off-grid classrooms. |
 | ⚡ **Sub-Millisecond Live Sync** | Real-time question broadcasting, synchronized timers, and live response counters powered by WebSockets. |
+| 🎈 **Live Floating Emoji Reactions** | Physics-animated emoji streams (`❤️`, `🔥`, `👍`, `🎉`) floating up the big screen in real-time. |
+| 📱 **Mentimote Mobile Remote** | Dedicated phone controller (`?role=remote`) allowing trainers to control slides, timers, and view speaker notes on the move. |
+| 💬 **Live Audience Q&A + Upvoting** | Real-time question submission drawer with peer upvoting and trainer moderation. |
+| ☁️ **Dynamic Word Cloud Slides** | Dynamic animated SVG word cloud with live frequency scaling and custom color palettes. |
+| 🎵 **Web Audio Sound Synthesizer** | 100% offline sound effects for countdown urgency, correct/incorrect chimes, drumrolls, and victory fanfares. |
 | 🏎️ **Speed-Bonus Scoring** | Adaptive scoring: 100 base points for correct answers + up to 50 bonus points for lightning-fast responses. |
-| 📱 **Zero-Install Mobile Flow** | Students join by navigating to a clean local URL or scanning a QR code on any mobile browser. |
 | 👤 **Persistent Accounts & Anti-Duplicate** | Mobile number-based participant tracking. Prevents duplicate votes and tracks multi-exam student progress across days. |
-| 📈 **Student Performance Profiles** | View student growth over time, historical exam timelines, and edit student details with real-time sync. |
+| 📈 **Student Performance Profiles & Report Cards** | Detailed personal report cards with rank badges, speed metrics, accuracy graphs, and print action. |
 | 📊 **Live Distribution & Explanations** | Beautiful animated bar charts showing cohort answer choices, correct answers, and rich technical explanations. |
 | 🏷️ **Trainer Category Toggle** | Toggle question topic/category hints (e.g., *Formulas, Pivot Tables*) on or off to avoid giving premature hints. |
 | 📑 **Master Excel Export (.xlsx)** | Single-click export producing multi-sheet Excel reports with student directories, marks logs, and question banks. |
