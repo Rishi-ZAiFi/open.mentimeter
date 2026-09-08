@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "question": "Which Excel formula is modern, dynamic, and replaces both VLOOKUP and HLOOKUP without requiring an exact column index number?",
+    "options": [
+      "OFFSET",
+      "INDEX / MATCH",
+      "LOOKUP",
+      "XLOOKUP"
+    ],
+    "correctAnswer": 3,
+    "explanation": "XLOOKUP searches a range or array and returns an item matching the first match, working both vertically and horizontally with exact match by default.",
+    "difficulty": "Easy",
+    "category": "Lookup Functions"
+  },
+  {
+    "id": 2,
+    "question": "In prompt engineering for technical data tasks, what does the 'Chain-of-Thought' (CoT) prompting strategy primarily instruct the LLM to do?",
+    "options": [
+      "Explain the reasoning step-by-step before the final answer",
+      "Generate maximum response length",
+      "Chain multiple API endpoints in sequence",
+      "Translate natural language directly into Python bytecode"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Chain-of-Thought prompting encourages the model to break down complex multi-step problems into intermediate logical steps before generating the final conclusion.",
+    "difficulty": "Medium",
+    "category": "AI Fundamentals"
+  },
+  {
+    "id": 3,
+    "question": "When calculating the average sales for 'North' region where sales exceed $5,000, which formula syntax is correct?",
+    "options": [
+      "=AVERAGEIF(Sales_Range, \">5000\", Region_Range, \"North\")",
+      "=AVERAGEIFS(Region_Range, \"North\", Sales_Range, \">5000\", Sales_Range)",
+      "=AVERAGEIFS(Sales_Range, Region_Range, \"North\", Sales_Range, \">5000\")",
+      "=SUMIFS(Sales_Range, Region_Range, \"North\") / COUNT(Sales_Range)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "In AVERAGEIFS, the average_range comes first, followed by pairs of criteria_range and criteria.",
+    "difficulty": "Medium",
+    "category": "Statistics"
+  },
+  {
+    "id": 4,
+    "question": "Which function effectively removes leading, trailing, and irregular duplicate spaces from text imported from an external ERP database?",
+    "options": [
+      "=CLEAN(text)",
+      "=TRIM(text)",
+      "=SUBSTITUTE(text, \" \", \"\")",
+      "=STRIP(text)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "TRIM removes all leading/trailing spaces and reduces multiple consecutive spaces between words into a single space.",
+    "difficulty": "Easy",
+    "category": "Data Cleaning"
+  },
+  {
+    "id": 5,
+    "question": "What is the key analytical difference between calculating 'Variance' as (Actual - Budget) versus '% Variance' as (Actual - Budget) / Budget?",
+    "options": [
+      "Variance ignores negative values entirely",
+      "There is no difference; they convey the identical metric",
+      "Absolute variance is always preferred by C-suite executives",
+      "% Variance normalizes scale differences across departments of varying sizes"
+    ],
+    "correctAnswer": 3,
+    "explanation": "% Variance normalizes performance, allowing fair comparison between large business units ($10M budget) and smaller teams ($100k budget).",
+    "difficulty": "Medium",
+    "category": "Variance"
+  },
+  {
+    "id": 6,
+    "question": "When building an AI workflow, what is the role of 'System Prompt' (or System Instructions)?",
+    "options": [
+      "To set the overarching persona, constraints, guidelines, and behavioral boundaries",
+      "To compile user inputs into SQL queries automatically",
+      "To format prompt tokens into GPU hardware instructions",
+      "To clear the model's training weights after every session"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The system prompt acts as foundational instructions that guide the model's persona, tone, rules, and behavioral boundaries across user interactions.",
+    "difficulty": "Easy",
+    "category": "AI Fundamentals"
+  },
+  {
+    "id": 7,
+    "question": "Which dynamic array formula in modern Excel extracts unique records sorted in ascending order from an unfiltered table range?",
+    "options": [
+      "=UNIQUE(SORT(range, 1, 1))",
+      "=FILTER(UNIQUE(range), 1)",
+      "=SORT(UNIQUE(range))",
+      "=DISTINCT(range, 1)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "=SORT(UNIQUE(range)) first removes duplicates with UNIQUE, then sorts the resulting distinct array in ascending order by default.",
+    "difficulty": "Medium",
+    "category": "Excel"
+  },
+  {
+    "id": 8,
+    "question": "In time-series trend analysis, what does a 3-month Simple Moving Average (SMA) accomplish?",
+    "options": [
+      "Eliminates historical records older than 90 days",
+      "Guarantees 100% forecasting precision for next quarter",
+      "Smooths out short-term fluctuations to reveal underlying cyclical or linear trends",
+      "Calculates compound monthly growth rate (CMGR)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Moving averages filter out short-term noise and random volatility to expose true underlying directional trends.",
+    "difficulty": "Medium",
+    "category": "Trend Analysis"
+  },
+  {
+    "id": 9,
+    "question": "In XLOOKUP, what argument allows you to specify a fallback value if the target item is not found, avoiding #N/A errors?",
+    "options": [
+      "if_not_found (the 4th argument)",
+      "match_mode",
+      "search_mode",
+      "error_handler"
+    ],
+    "correctAnswer": 0,
+    "explanation": "XLOOKUP has a built-in 4th argument [if_not_found], eliminating the need to wrap formulas in IFERROR or IFNA.",
+    "difficulty": "Easy",
+    "category": "Lookup Functions"
+  },
+  {
+    "id": 10,
+    "question": "When transforming dirty dataset dates formatted like '2026.09.08' into true Excel date serials, which approach is most robust in Power Query?",
+    "options": [
+      "Multiply column by 1",
+      "Delete all dots using Find & Replace",
+      "Use =TEXT(col, \"YYYY/MM/DD\") in formula bar",
+      "Change Type with Locale / Replace delimiter '.' with '/'"
+    ],
+    "correctAnswer": 3,
+    "explanation": "In Power Query, using 'Change Type with Locale' or replacing delimiters with standard date separators ensures locale-independent parsing.",
+    "difficulty": "Medium",
+    "category": "Data Cleaning"
+  },
+  {
+    "id": 11,
+    "question": "What does a 'Temperature' setting of 0.0 vs 1.0 signify when querying a Large Language Model (LLM)?",
+    "options": [
+      "0.0 makes the model generate faster responses",
+      "0.0 produces deterministic, focused outputs; 1.0 increases randomness and creative variance",
+      "0.0 enables web search; 1.0 limits the model to local memory",
+      "0.0 reduces token consumption by 50%"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Lower temperature (near 0) selects high-probability tokens for consistent, deterministic answers; higher temperature increases output diversity.",
+    "difficulty": "Easy",
+    "category": "AI Fundamentals"
+  },
+  {
+    "id": 12,
+    "question": "In statistical data summaries, why is the Median often preferred over the Mean (Average) when analyzing employee compensation or home prices?",
+    "options": [
+      "Median is resistant to extreme outliers and skewed distributions",
+      "Median is easier to compute in Excel",
+      "Mean only works on integers",
+      "Median always yields a larger numeric value"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The median represents the 50th percentile and is not distorted by extreme high or low outliers, unlike the arithmetic mean.",
+    "difficulty": "Easy",
+    "category": "Statistics"
+  },
+  {
+    "id": 13,
+    "question": "Which Excel formula dynamically filters a dataset to display only records where Category is 'Hardware' and Status is 'Active'?",
+    "options": [
+      "=FILTER(Data, (Category=\"Hardware\") * (Status=\"Active\"))",
+      "=FILTER(Data, (Category=\"Hardware\") + (Status=\"Active\"))",
+      "=CHOOSECOLS(Data, \"Hardware\", \"Active\")",
+      "=QUERY(Data, \"WHERE Category=Hardware AND Status=Active\")"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In the FILTER function, the boolean multiplication operator (*) represents the AND condition, while addition (+) represents OR.",
+    "difficulty": "Hard",
+    "category": "Excel"
+  },
+  {
+    "id": 14,
+    "question": "In financial variance analysis, what does a 'Favorable' (F) expense variance indicate?",
+    "options": [
+      "Actual expenses exceeded budgeted expenses",
+      "Revenue exceeded expenses by 10%",
+      "Actual expenses were lower than budgeted expenses",
+      "Forecasted variance equals zero"
+    ],
+    "correctAnswer": 2,
+    "explanation": "For expenses, spending less than budgeted is Favorable (F) because it improves net operating profit.",
+    "difficulty": "Easy",
+    "category": "Variance"
+  },
+  {
+    "id": 15,
+    "question": "What is the primary risk of 'AI Hallucination' when using LLMs for data transformation?",
+    "options": [
+      "The model might crash the local computer",
+      "The model renames column headers to uppercase",
+      "The server rate limits incoming requests",
+      "The model generates plausible-sounding but factually incorrect data or synthetic values"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Hallucination refers to the generation of confident, grammatically coherent statements or figures that are entirely fabricated or incorrect.",
+    "difficulty": "Easy",
+    "category": "AI Fundamentals"
+  },
+  {
+    "id": 16,
+    "question": "In an Excel Pivot Table, what is the fastest way to view revenue contributions as a percentage of overall corporate sales?",
+    "options": [
+      "Write a custom VBA script",
+      "In Value Field Settings, set 'Show Values As' to '% of Grand Total'",
+      "Create 5 separate calculated columns manually",
+      "Use SUMPRODUCT in adjacent cells"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Value Field Settings -> 'Show Values As' -> '% of Grand Total' instantly converts raw sums into relative percentage shares.",
+    "difficulty": "Easy",
+    "category": "Pivot Tables"
+  },
+  {
+    "id": 17,
+    "question": "Which combination of functions is best suited to find the closest match or binary search in a sorted 1-million-row lookup table for sub-millisecond execution?",
+    "options": [
+      "VLOOKUP with exact match (FALSE)",
+      "HLOOKUP with TRANSPOSE",
+      "XLOOKUP with search_mode = 2 (Binary search on ascending sorted data)",
+      "COUNTIF with wildcard search"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Binary search (search_mode 2 in XLOOKUP) performs O(log n) searches, completing lookups in microseconds across millions of sorted records.",
+    "difficulty": "Hard",
+    "category": "Lookup Functions"
+  },
+  {
+    "id": 18,
+    "question": "When calculating Compound Annual Growth Rate (CAGR) over 4 years from $100k starting revenue to $250k ending revenue, what is the formula?",
+    "options": [
+      "=(250000 / 100000) / 4",
+      "=(250000 - 100000) * 4%",
+      "=GROWTH(250000, 100000, 4)",
+      "=(250000 / 100000) ^ (1/4) - 1"
+    ],
+    "correctAnswer": 3,
+    "explanation": "CAGR = (End Value / Start Value)^(1 / Number of Periods) - 1. Here, (250/100)^(0.25) - 1 ≈ 25.74% annualized growth.",
+    "difficulty": "Hard",
+    "category": "Trend Analysis"
+  },
+  {
+    "id": 19,
+    "question": "Which function allows you to quickly transform rows into columns or columns into rows dynamically in Modern Excel?",
+    "options": [
+      "=FLIP()",
+      "=TRANSPOSE()",
+      "=ROTATE()",
+      "=PIVOTARRAY()"
+    ],
+    "correctAnswer": 1,
+    "explanation": "=TRANSPOSE(array) returns a dynamic vertical array as horizontal or vice versa without manual paste-special.",
+    "difficulty": "Easy",
+    "category": "Excel"
+  },
+  {
+    "id": 20,
+    "question": "What is 'Few-Shot Prompting' in AI and technical query construction?",
+    "options": [
+      "Providing 2-3 concrete input/output examples within the prompt before asking the target question",
+      "Running the model 5 times and averaging the answers",
+      "Sending prompts with fewer than 10 words",
+      "Fine-tuning model weights with a massive dataset"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Few-shot prompting provides exemplars demonstrating expected pattern, format, and edge cases to guide the LLM's response accuracy.",
+    "difficulty": "Medium",
+    "category": "AI Fundamentals"
+  }
+]

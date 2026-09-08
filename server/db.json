@@ -1,0 +1,984 @@
+{
+  "students": [
+    {
+      "id": "stu-1000",
+      "phone": "9876500001",
+      "name": "Theja Clone",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:36:55.619Z",
+      "totalQuizzes": 1,
+      "totalScore": 2647,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-1",
+          "studentId": "stu-1000",
+          "studentPhone": "9876500001",
+          "studentName": "Theja Gorrepati (Updated)",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2647,
+          "accuracy": 95,
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "id": "stu-1001",
+      "phone": "9876500002",
+      "name": "Charishma Barla",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2638,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-2",
+          "studentId": "stu-1001",
+          "studentPhone": "9876500002",
+          "studentName": "Charishma Barla",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2638,
+          "accuracy": 95,
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "id": "stu-1002",
+      "phone": "9876500003",
+      "name": "Velmurugan",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2593,
+      "avgAccuracy": 100,
+      "history": [
+        {
+          "id": "res-DW-7764-3",
+          "studentId": "stu-1002",
+          "studentPhone": "9876500003",
+          "studentName": "Velmurugan",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 20,
+          "score": 2593,
+          "accuracy": 100,
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "id": "stu-1003",
+      "phone": "9876500004",
+      "name": "Avinash.G",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2579,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-4",
+          "studentId": "stu-1003",
+          "studentPhone": "9876500004",
+          "studentName": "Avinash.G",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2579,
+          "accuracy": 95,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "id": "stu-1004",
+      "phone": "9876500005",
+      "name": "Anumandhiram",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2576,
+      "avgAccuracy": 100,
+      "history": [
+        {
+          "id": "res-DW-7764-5",
+          "studentId": "stu-1004",
+          "studentPhone": "9876500005",
+          "studentName": "Anumandhiram",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 20,
+          "score": 2576,
+          "accuracy": 100,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "id": "stu-1005",
+      "phone": "9876500006",
+      "name": "Shri Darshan C",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2565,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-6",
+          "studentId": "stu-1005",
+          "studentPhone": "9876500006",
+          "studentName": "Shri Darshan C",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2565,
+          "accuracy": 95,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "id": "stu-1006",
+      "phone": "9876500007",
+      "name": "PRADEEPA P",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2553,
+      "avgAccuracy": 100,
+      "history": [
+        {
+          "id": "res-DW-7764-7",
+          "studentId": "stu-1006",
+          "studentPhone": "9876500007",
+          "studentName": "PRADEEPA P",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 20,
+          "score": 2553,
+          "accuracy": 100,
+          "rank": 7
+        }
+      ]
+    },
+    {
+      "id": "stu-1007",
+      "phone": "9876500008",
+      "name": "Thirumoorithy. P",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2516,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-8",
+          "studentId": "stu-1007",
+          "studentPhone": "9876500008",
+          "studentName": "Thirumoorithy. P",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2516,
+          "accuracy": 95,
+          "rank": 8
+        }
+      ]
+    },
+    {
+      "id": "stu-1008",
+      "phone": "9876500009",
+      "name": "D Premkumar",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2485,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-9",
+          "studentId": "stu-1008",
+          "studentPhone": "9876500009",
+          "studentName": "D Premkumar",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2485,
+          "accuracy": 95,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "id": "stu-1009",
+      "phone": "9876500010",
+      "name": "T. Nishanthkumar",
+      "createdAt": "2026-09-08T12:22:15.542Z",
+      "updatedAt": "2026-09-08T12:22:15.542Z",
+      "totalQuizzes": 1,
+      "totalScore": 2484,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-10",
+          "studentId": "stu-1009",
+          "studentPhone": "9876500010",
+          "studentName": "T. Nishanthkumar",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2484,
+          "accuracy": 95,
+          "rank": 10
+        }
+      ]
+    },
+    {
+      "id": "stu-1010",
+      "phone": "9876500011",
+      "name": "Suresh R",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2478,
+      "avgAccuracy": 95,
+      "history": [
+        {
+          "id": "res-DW-7764-11",
+          "studentId": "stu-1010",
+          "studentPhone": "9876500011",
+          "studentName": "Suresh R",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 19,
+          "score": 2478,
+          "accuracy": 95,
+          "rank": 11
+        }
+      ]
+    },
+    {
+      "id": "stu-1011",
+      "phone": "9876500012",
+      "name": "S.Naveen Abishek",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2379,
+      "avgAccuracy": 90,
+      "history": [
+        {
+          "id": "res-DW-7764-12",
+          "studentId": "stu-1011",
+          "studentPhone": "9876500012",
+          "studentName": "S.Naveen Abishek",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 18,
+          "score": 2379,
+          "accuracy": 90,
+          "rank": 12
+        }
+      ]
+    },
+    {
+      "id": "stu-1012",
+      "phone": "9876500013",
+      "name": "Abhishek V",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2278,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-13",
+          "studentId": "stu-1012",
+          "studentPhone": "9876500013",
+          "studentName": "Abhishek V",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2278,
+          "accuracy": 85,
+          "rank": 13
+        }
+      ]
+    },
+    {
+      "id": "stu-1013",
+      "phone": "9876500014",
+      "name": "Anil Kumar",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2246,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-14",
+          "studentId": "stu-1013",
+          "studentPhone": "9876500014",
+          "studentName": "Anil Kumar",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2246,
+          "accuracy": 85,
+          "rank": 14
+        }
+      ]
+    },
+    {
+      "id": "stu-1014",
+      "phone": "9876500015",
+      "name": "ROHIT",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2245,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-15",
+          "studentId": "stu-1014",
+          "studentPhone": "9876500015",
+          "studentName": "ROHIT",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2245,
+          "accuracy": 85,
+          "rank": 15
+        }
+      ]
+    },
+    {
+      "id": "stu-1015",
+      "phone": "9876500016",
+      "name": "Parameswaran",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2229,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-16",
+          "studentId": "stu-1015",
+          "studentPhone": "9876500016",
+          "studentName": "Parameswaran",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2229,
+          "accuracy": 85,
+          "rank": 16
+        }
+      ]
+    },
+    {
+      "id": "stu-1016",
+      "phone": "9876500017",
+      "name": "Bhavesh patni",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2187,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-17",
+          "studentId": "stu-1016",
+          "studentPhone": "9876500017",
+          "studentName": "Bhavesh patni",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2187,
+          "accuracy": 85,
+          "rank": 17
+        }
+      ]
+    },
+    {
+      "id": "stu-1017",
+      "phone": "9876500018",
+      "name": "Natarajan PM",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2175,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-18",
+          "studentId": "stu-1017",
+          "studentPhone": "9876500018",
+          "studentName": "Natarajan PM",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2175,
+          "accuracy": 85,
+          "rank": 18
+        }
+      ]
+    },
+    {
+      "id": "stu-1018",
+      "phone": "9876500019",
+      "name": "Saravana Kumar T",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2076,
+      "avgAccuracy": 80,
+      "history": [
+        {
+          "id": "res-DW-7764-19",
+          "studentId": "stu-1018",
+          "studentPhone": "9876500019",
+          "studentName": "Saravana Kumar T",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 16,
+          "score": 2076,
+          "accuracy": 80,
+          "rank": 19
+        }
+      ]
+    },
+    {
+      "id": "stu-1019",
+      "phone": "9876500020",
+      "name": "Sundar",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2026,
+      "avgAccuracy": 75,
+      "history": [
+        {
+          "id": "res-DW-7764-20",
+          "studentId": "stu-1019",
+          "studentPhone": "9876500020",
+          "studentName": "Sundar",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 15,
+          "score": 2026,
+          "accuracy": 75,
+          "rank": 20
+        }
+      ]
+    },
+    {
+      "id": "stu-1020",
+      "phone": "9876500021",
+      "name": "Venkadesh",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 2011,
+      "avgAccuracy": 85,
+      "history": [
+        {
+          "id": "res-DW-7764-21",
+          "studentId": "stu-1020",
+          "studentPhone": "9876500021",
+          "studentName": "Venkadesh",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 17,
+          "score": 2011,
+          "accuracy": 85,
+          "rank": 21
+        }
+      ]
+    },
+    {
+      "id": "stu-1021",
+      "phone": "9876500022",
+      "name": "Sabarinathan",
+      "createdAt": "2026-09-08T12:22:15.543Z",
+      "updatedAt": "2026-09-08T12:22:15.543Z",
+      "totalQuizzes": 1,
+      "totalScore": 1933,
+      "avgAccuracy": 70,
+      "history": [
+        {
+          "id": "res-DW-7764-22",
+          "studentId": "stu-1021",
+          "studentPhone": "9876500022",
+          "studentName": "Sabarinathan",
+          "sessionCode": "DW-7764",
+          "quizTitle": "Course 1 — Day 1 Assessment",
+          "date": "2026-09-08",
+          "totalQuestions": 20,
+          "correctAnswers": 14,
+          "score": 1933,
+          "accuracy": 70,
+          "rank": 22
+        }
+      ]
+    },
+    {
+      "id": "stu-1788871055503-atxd",
+      "phone": "9876500099",
+      "name": "Test Student",
+      "createdAt": "2026-09-08T12:37:35.503Z",
+      "updatedAt": "2026-09-08T12:37:35.503Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess-DW-7764",
+      "code": "DW-7764",
+      "title": "Course 1 — Day 1 Assessment",
+      "trainerName": "Rishi Bharathi B T",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "totalParticipants": 22,
+      "avgScore": 2359,
+      "avgAccuracy": 90
+    },
+    {
+      "id": "sess-DW-DAY2-1788870159259",
+      "code": "DW-DAY2",
+      "title": "Digi Warriors Technical Assessment",
+      "trainerName": "Lead Trainer",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "totalParticipants": 1,
+      "avgScore": 143,
+      "avgAccuracy": 5
+    },
+    {
+      "id": "sess-DW-DAY2-1788871018100",
+      "code": "DW-DAY2",
+      "title": "Digi Warriors Technical Assessment",
+      "trainerName": "Lead Trainer",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "totalParticipants": 1,
+      "avgScore": 143,
+      "avgAccuracy": 5
+    }
+  ],
+  "examResults": [
+    {
+      "id": "res-DW-7764-1",
+      "studentId": "stu-1000",
+      "studentPhone": "9876500001",
+      "studentName": "Theja Gorrepati (Updated)",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2647,
+      "accuracy": 95,
+      "rank": 1
+    },
+    {
+      "id": "res-DW-7764-2",
+      "studentId": "stu-1001",
+      "studentPhone": "9876500002",
+      "studentName": "Charishma Barla",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2638,
+      "accuracy": 95,
+      "rank": 2
+    },
+    {
+      "id": "res-DW-7764-3",
+      "studentId": "stu-1002",
+      "studentPhone": "9876500003",
+      "studentName": "Velmurugan",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 20,
+      "score": 2593,
+      "accuracy": 100,
+      "rank": 3
+    },
+    {
+      "id": "res-DW-7764-4",
+      "studentId": "stu-1003",
+      "studentPhone": "9876500004",
+      "studentName": "Avinash.G",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2579,
+      "accuracy": 95,
+      "rank": 4
+    },
+    {
+      "id": "res-DW-7764-5",
+      "studentId": "stu-1004",
+      "studentPhone": "9876500005",
+      "studentName": "Anumandhiram",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 20,
+      "score": 2576,
+      "accuracy": 100,
+      "rank": 5
+    },
+    {
+      "id": "res-DW-7764-6",
+      "studentId": "stu-1005",
+      "studentPhone": "9876500006",
+      "studentName": "Shri Darshan C",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2565,
+      "accuracy": 95,
+      "rank": 6
+    },
+    {
+      "id": "res-DW-7764-7",
+      "studentId": "stu-1006",
+      "studentPhone": "9876500007",
+      "studentName": "PRADEEPA P",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 20,
+      "score": 2553,
+      "accuracy": 100,
+      "rank": 7
+    },
+    {
+      "id": "res-DW-7764-8",
+      "studentId": "stu-1007",
+      "studentPhone": "9876500008",
+      "studentName": "Thirumoorithy. P",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2516,
+      "accuracy": 95,
+      "rank": 8
+    },
+    {
+      "id": "res-DW-7764-9",
+      "studentId": "stu-1008",
+      "studentPhone": "9876500009",
+      "studentName": "D Premkumar",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2485,
+      "accuracy": 95,
+      "rank": 9
+    },
+    {
+      "id": "res-DW-7764-10",
+      "studentId": "stu-1009",
+      "studentPhone": "9876500010",
+      "studentName": "T. Nishanthkumar",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2484,
+      "accuracy": 95,
+      "rank": 10
+    },
+    {
+      "id": "res-DW-7764-11",
+      "studentId": "stu-1010",
+      "studentPhone": "9876500011",
+      "studentName": "Suresh R",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 19,
+      "score": 2478,
+      "accuracy": 95,
+      "rank": 11
+    },
+    {
+      "id": "res-DW-7764-12",
+      "studentId": "stu-1011",
+      "studentPhone": "9876500012",
+      "studentName": "S.Naveen Abishek",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 18,
+      "score": 2379,
+      "accuracy": 90,
+      "rank": 12
+    },
+    {
+      "id": "res-DW-7764-13",
+      "studentId": "stu-1012",
+      "studentPhone": "9876500013",
+      "studentName": "Abhishek V",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2278,
+      "accuracy": 85,
+      "rank": 13
+    },
+    {
+      "id": "res-DW-7764-14",
+      "studentId": "stu-1013",
+      "studentPhone": "9876500014",
+      "studentName": "Anil Kumar",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2246,
+      "accuracy": 85,
+      "rank": 14
+    },
+    {
+      "id": "res-DW-7764-15",
+      "studentId": "stu-1014",
+      "studentPhone": "9876500015",
+      "studentName": "ROHIT",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2245,
+      "accuracy": 85,
+      "rank": 15
+    },
+    {
+      "id": "res-DW-7764-16",
+      "studentId": "stu-1015",
+      "studentPhone": "9876500016",
+      "studentName": "Parameswaran",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2229,
+      "accuracy": 85,
+      "rank": 16
+    },
+    {
+      "id": "res-DW-7764-17",
+      "studentId": "stu-1016",
+      "studentPhone": "9876500017",
+      "studentName": "Bhavesh patni",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2187,
+      "accuracy": 85,
+      "rank": 17
+    },
+    {
+      "id": "res-DW-7764-18",
+      "studentId": "stu-1017",
+      "studentPhone": "9876500018",
+      "studentName": "Natarajan PM",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2175,
+      "accuracy": 85,
+      "rank": 18
+    },
+    {
+      "id": "res-DW-7764-19",
+      "studentId": "stu-1018",
+      "studentPhone": "9876500019",
+      "studentName": "Saravana Kumar T",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 16,
+      "score": 2076,
+      "accuracy": 80,
+      "rank": 19
+    },
+    {
+      "id": "res-DW-7764-20",
+      "studentId": "stu-1019",
+      "studentPhone": "9876500020",
+      "studentName": "Sundar",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 15,
+      "score": 2026,
+      "accuracy": 75,
+      "rank": 20
+    },
+    {
+      "id": "res-DW-7764-21",
+      "studentId": "stu-1020",
+      "studentPhone": "9876500021",
+      "studentName": "Venkadesh",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 17,
+      "score": 2011,
+      "accuracy": 85,
+      "rank": 21
+    },
+    {
+      "id": "res-DW-7764-22",
+      "studentId": "stu-1021",
+      "studentPhone": "9876500022",
+      "studentName": "Sabarinathan",
+      "sessionCode": "DW-7764",
+      "quizTitle": "Course 1 — Day 1 Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 14,
+      "score": 1933,
+      "accuracy": 70,
+      "rank": 22
+    },
+    {
+      "id": "res-DW-DAY2-stu-1000-1788870159259",
+      "studentId": "stu-1000",
+      "studentPhone": "9876500001",
+      "studentName": "Theja Gorrepati (Updated)",
+      "sessionCode": "DW-DAY2",
+      "quizTitle": "Digi Warriors Technical Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 1,
+      "score": 143,
+      "accuracy": 5,
+      "rank": 1,
+      "answersDetail": [
+        {
+          "questionIndex": 0,
+          "questionId": 1,
+          "question": "Which Excel formula is modern, dynamic, and replaces both VLOOKUP and HLOOKUP without requiring an exact column index number?",
+          "category": "Lookup Functions",
+          "selectedOption": 3,
+          "isCorrect": true,
+          "pointsEarned": 143,
+          "responseTimeMs": 2000
+        }
+      ]
+    },
+    {
+      "id": "res-DW-DAY2-stu-1000-1788871018101",
+      "studentId": "stu-1000",
+      "studentPhone": "9876500001",
+      "studentName": "Theja Clone",
+      "sessionCode": "DW-DAY2",
+      "quizTitle": "Digi Warriors Technical Assessment",
+      "date": "2026-09-08",
+      "totalQuestions": 20,
+      "correctAnswers": 1,
+      "score": 143,
+      "accuracy": 5,
+      "rank": 1,
+      "answersDetail": [
+        {
+          "questionIndex": 0,
+          "questionId": 1,
+          "question": "Which Excel formula is modern, dynamic, and replaces both VLOOKUP and HLOOKUP without requiring an exact column index number?",
+          "category": "Lookup Functions",
+          "selectedOption": 3,
+          "isCorrect": true,
+          "pointsEarned": 143,
+          "responseTimeMs": 2000
+        }
+      ]
+    }
+  ]
+}
