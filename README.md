@@ -2,19 +2,41 @@
 
 <div align="center">
 
+[![Latest Release](https://img.shields.io/badge/Release-v1.0.0--Win64-blueviolet?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/your-username/openmenti/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
 [![Socket.io](https://img.shields.io/badge/Socket.io-Real--Time-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io)
 [![Zero Cloud](https://img.shields.io/badge/Zero--Cloud-100%25%20Offline-success?style=for-the-badge)]()
-[![Platform: Windows / Mac / Linux](https://img.shields.io/badge/Platform-Cross--Platform-lightgrey?style=for-the-badge)]()
 
 **A free, open-source, local-first alternative to Mentimeter & Kahoot.**  
 *Host high-stakes live MCQ examinations, training assessments, and interactive classroom quizzes without internet, cloud subscriptions, Firebase, or external servers.*
 
-[Quick Start](#-quick-start) • [Key Features](#-key-features) • [How It Works](#-how-it-works) • [Question Banks](#-custom-question-banks) • [Excel Export](#-master-excel-export) • [Windows Launcher](#-native-windows-launcher) • [License](#-license)
+[📦 **Download v1.0.0 (Windows .exe)**](https://github.com/your-username/openmenti/releases/latest) • [⚡ Quick Start](#-quick-start) • [✨ Key Features](#-key-features) • [⚖️ Feature Comparison](#-openmenti-vs-mentimeter-vs-kahoot) • [📝 Question Banks](#-custom-question-banks) • [📊 Excel Export](#-master-excel-export)
+
+---
+
+<!-- 🎥 Replace demo.gif with a 10-second screen capture of Trainer screen + Mobile phone joining & voting -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/your-username/openmenti/main/public/demo-preview.gif" alt="OpenMenti Live Demo Preview" width="850" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);" onerror="this.onerror=null; this.src='https://placehold.co/850x420/1e293b/38bdf8?text=⚡+OpenMenti+Live+Demo+%7C+Zero-Cloud+Classroom+Engine';">
+</p>
 
 </div>
+
+---
+
+## ⚖️ OpenMenti vs Mentimeter vs Kahoot
+
+| Feature | ⚡ **OpenMenti / DigiWarriors** | 🟣 Mentimeter | 🟢 Kahoot |
+| :--- | :---: | :---: | :---: |
+| **Pricing** | **100% Free & Open Source** | $12–$25 / month | $17–$60 / month |
+| **Participant Limit** | **Unlimited** (Hardware bound) | 50 (Free tier) | 10–50 (Free tier) |
+| **Internet Required?** | ❌ **Zero (Runs on local Hotspot/LAN)** | ✅ Requires Internet | ✅ Requires Internet |
+| **Data Privacy** | 🔒 **100% On-Premises / Local JSON** | Cloud Hosted | Cloud Hosted |
+| **Latency** | ⚡ **Sub-millisecond Local WebSockets** | 200–800ms Cloud | 200–800ms Cloud |
+| **Standalone Desktop App** | ✅ **Native Windows `.exe` included** | ❌ Web Only | ❌ Web Only |
+| **Student History & Profiles** | ✅ **Built-in Student Directory & Marks** | Paid Tier | Paid Tier |
+| **Master Excel Export (.xlsx)** | ✅ **Multi-sheet automated workbook** | Paid Tier | Paid Tier |
 
 ---
 
@@ -193,6 +215,9 @@ node test_reload_flow.js
 
 # Test topic/category visibility toggles
 node test_topic_toggle.js
+
+# Test persistent trainer profiles & instant session reconnect
+node test_trainer_profile_flow.js
 ```
 
 ---

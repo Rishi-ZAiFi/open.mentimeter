@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag } from 'lucide-react';
+import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag, UserCheck, RefreshCw, Radio } from 'lucide-react';
 import defaultQuestions from '../../data/questions.json';
 
 export default function TrainerLogin({ onBack }) {
-  const { createSession, errorMessage } = useQuiz();
-  const [name, setName] = useState('');
+  const { createSession, reconnectTrainer, errorMessage } = useQuiz();
+  const [name, setName] = useState(() => localStorage.getItem('dw_trainer_name') || '');
   const [timerDuration, setTimerDuration] = useState(30);
   const [speedBonus, setSpeedBonus] = useState(true);
   const [showTopic, setShowTopic] = useState(false);
@@ -13,6 +13,34 @@ export default function TrainerLogin({ onBack }) {
   const [customFileName, setCustomFileName] = useState('');
   const [fileError, setFileError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Saved Trainers & Active Sessions
+  const [savedTrainers, setSavedTrainers] = useState([]);
+  const [activeSessions, setActiveSessions] = useState([]);
+  const [isLoadingMeta, setIsLoadingMeta] = useState(true);
+  const [reconnectingCode, setReconnectingCode] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    Promise.all([
+      fetch('/api/trainers').then(r => r.json()).catch(() => ({ trainers: [] })),
+      fetch('/api/active-sessions').then(r => r.json()).catch(() => ({ sessions: [] }))
+    ]).then(([trainersData, sessionsData]) => {
+      if (!isMounted) return;
+      if (trainersData && trainersData.trainers) {
+        setSavedTrainers(trainersData.trainers);
+        if (!name && trainersData.trainers.length > 0) {
+          setName(trainersData.trainers[0].name);
+        }
+      }
+      if (sessionsData && sessionsData.sessions) {
+        setActiveSessions(sessionsData.sessions);
+      }
+      setIsLoadingMeta(false);
+    });
+
+    return () => { isMounted = false; };
+  }, []);
 
   const timerOptions = [
     { label: '15 sec', value: 15 },
@@ -51,6 +79,16 @@ export default function TrainerLogin({ onBack }) {
     reader.readAsText(file);
   };
 
+  const handleReconnectSession = (session) => {
+    setReconnectingCode(session.code);
+    reconnectTrainer({
+      code: session.code,
+      name: name || session.trainerName
+    }, () => {
+      setReconnectingCode(null);
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
@@ -70,7 +108,7 @@ export default function TrainerLogin({ onBack }) {
   const questionCount = customQuestions ? customQuestions.length : defaultQuestions.length;
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8 sm:py-16 animate-fade-in">
+    <div className="max-w-xl mx-auto px-4 py-8 sm:py-14 animate-fade-in">
       
       {/* Back Button */}
       <button
@@ -80,6 +118,48 @@ export default function TrainerLogin({ onBack }) {
         <ArrowLeft className="w-4 h-4" />
         <span>Back to role selection</span>
       </button>
+
+      {/* Active Session Detected Card */}
+      {activeSessions.length > 0 && (
+        <div className="mb-6 p-5 rounded-2xl bg-gradient-to-r from-blue-950/60 to-indigo-950/60 border border-blue-500/40 shadow-xl shadow-blue-500/10">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 mb-3">
+            <Radio className="w-4 h-4 text-emerald-400 animate-pulse" />
+            <span>Active Session Running on Server</span>
+          </div>
+
+          {activeSessions.map((sess) => (
+            <div key={sess.code} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-mono text-base font-black text-white px-2.5 py-0.5 rounded bg-blue-600/30 border border-blue-500/40 text-blue-300">
+                    {sess.code}
+                  </span>
+                  <span className="text-xs text-slate-300 font-semibold">
+                    Hosted by {sess.trainerName}
+                  </span>
+                </div>
+                <div className="text-[11px] text-slate-400 flex items-center gap-3">
+                  <span>👥 {sess.participantsCount} enrolled</span>
+                  <span>•</span>
+                  <span>📋 Q {sess.currentQuestionIndex + 1}/{sess.totalQuestions}</span>
+                  <span>•</span>
+                  <span className="capitalize text-emerald-400 font-medium">Status: {sess.status}</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleReconnectSession(sess)}
+                disabled={reconnectingCode === sess.code}
+                className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all flex-shrink-0"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${reconnectingCode === sess.code ? 'animate-spin' : ''}`} />
+                <span>{reconnectingCode === sess.code ? 'Resuming...' : 'Resume Session'}</span>
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Card Container */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
@@ -94,7 +174,7 @@ export default function TrainerLogin({ onBack }) {
               Trainer Setup
             </h2>
             <p className="text-xs text-slate-400">
-              Configure session parameters and launch your live examination.
+              Select or enter your profile to configure and launch a live quiz.
             </p>
           </div>
         </div>
@@ -109,6 +189,38 @@ export default function TrainerLogin({ onBack }) {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           
+          {/* Saved Trainer Profile Quick Select */}
+          {savedTrainers.length > 0 && (
+            <div>
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
+                <UserCheck className="w-3.5 h-3.5 text-blue-400" />
+                <span>Saved Trainer Profiles (Click to Select)</span>
+              </label>
+              <div className="flex items-center gap-2 flex-wrap">
+                {savedTrainers.map((t) => (
+                  <button
+                    key={t.id || t.name}
+                    type="button"
+                    onClick={() => setName(t.name)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 ${
+                      name.trim().toLowerCase() === t.name.toLowerCase()
+                        ? 'bg-blue-600/30 text-blue-300 border-blue-500/60 ring-1 ring-blue-500/50'
+                        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700 hover:text-white'
+                    }`}
+                  >
+                    <span>👤</span>
+                    <span>{t.name}</span>
+                    {t.totalSessions > 1 && (
+                      <span className="text-[10px] opacity-70 bg-slate-800 px-1.5 py-0.2 rounded font-mono">
+                        {t.totalSessions} sessions
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Trainer Name Input */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
@@ -117,8 +229,8 @@ export default function TrainerLogin({ onBack }) {
             <input
               type="text"
               required
-              autoFocus
-              placeholder="e.g., Coach Dave / Lead Instructor"
+              autoFocus={!name}
+              placeholder="e.g., Rishi Bharathi B T / Coach Dave"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"

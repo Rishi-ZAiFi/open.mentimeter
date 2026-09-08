@@ -317,6 +317,42 @@ export function QuizProvider({ children }) {
     });
   }, []);
 
+  const reconnectTrainer = useCallback(({ code, name }, callback) => {
+    setErrorMessage(null);
+    const cleanCode = (code || '').toUpperCase().trim();
+    const cleanName = (name || '').trim();
+
+    socket.emit('reconnect_trainer', {
+      sessionCode: cleanCode,
+      trainerName: cleanName
+    }, (res) => {
+      if (res && res.success) {
+        setSessionCode(cleanCode);
+        setTrainerName(res.trainerName || cleanName);
+        setRole('trainer');
+        setSessionStatus(res.status || 'ready');
+        setCurrentQuestionIndex(res.currentQuestionIndex || 0);
+        setQuestionState(res.questionState || 'active');
+        setTimerDuration(res.timerDuration || 30);
+        setTimeRemaining(res.timeRemaining || 30);
+        setSpeedBonusEnabled(res.speedBonusEnabled !== undefined ? res.speedBonusEnabled : true);
+        setShowTopic(res.showTopic !== undefined ? res.showTopic : false);
+        setTotalQuestions(res.totalQuestions || 20);
+        if (res.participants) setParticipants(res.participants);
+        if (res.currentQuestion) setCurrentQuestion(res.currentQuestion);
+        if (res.liveAnswerCount) setLiveAnswerCount(res.liveAnswerCount);
+        if (res.analytics) {
+          setAnalytics(res.analytics);
+          setLeaderboard(res.analytics.leaderboard || []);
+        }
+        if (callback) callback(res);
+      } else {
+        setErrorMessage(res?.error || 'Unable to reconnect to session');
+        if (callback) callback(res);
+      }
+    });
+  }, []);
+
   const toggleTopicVisibility = useCallback(() => {
     if (!sessionCode) return;
     socket.emit('toggle_topic_visibility', { sessionCode });
@@ -482,6 +518,7 @@ export function QuizProvider({ children }) {
       errorMessage,
       setErrorMessage,
       createSession,
+      reconnectTrainer,
       joinSession,
       startQuiz,
       submitAnswer,

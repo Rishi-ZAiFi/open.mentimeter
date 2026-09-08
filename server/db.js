@@ -8,6 +8,7 @@ const DB_PATH = path.join(__dirname, 'db.json');
 
 // Default initial database schema
 const defaultDb = {
+  trainers: [],
   students: [],
   sessions: [],
   examResults: []
@@ -24,6 +25,7 @@ class Database {
       if (fs.existsSync(DB_PATH)) {
         const raw = fs.readFileSync(DB_PATH, 'utf8');
         this.data = JSON.parse(raw);
+        if (!this.data.trainers) this.data.trainers = [];
       } else {
         this.data = defaultDb;
         this.seedDay1Data();
@@ -117,6 +119,61 @@ class Database {
 
       this.data.students.push(studentObj);
     });
+
+    if (!this.data.trainers) this.data.trainers = [];
+    if (this.data.trainers.length === 0) {
+      this.data.trainers.push({
+        id: "tr-1000",
+        name: "Rishi Bharathi B T",
+        title: "Lead Technical Instructor",
+        createdAt: new Date().toISOString(),
+        lastActive: new Date().toISOString(),
+        totalSessions: 1
+      });
+    }
+  }
+
+  // --- Trainer Operations ---
+  getAllTrainers() {
+    if (!this.data.trainers) this.data.trainers = [];
+    return this.data.trainers;
+  }
+
+  findTrainerByName(name) {
+    if (!name) return null;
+    if (!this.data.trainers) this.data.trainers = [];
+    const clean = name.toLowerCase().trim();
+    return this.data.trainers.find(t => t.name.toLowerCase().trim() === clean) || null;
+  }
+
+  createOrUpdateTrainer(name, additionalData = {}) {
+    if (!name || !name.trim()) return null;
+    if (!this.data.trainers) this.data.trainers = [];
+
+    const cleanName = name.trim();
+    let trainer = this.findTrainerByName(cleanName);
+
+    if (!trainer) {
+      trainer = {
+        id: `tr-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+        name: cleanName,
+        title: additionalData.title || 'Technical Trainer',
+        createdAt: new Date().toISOString(),
+        lastActive: new Date().toISOString(),
+        totalSessions: 1,
+        ...additionalData
+      };
+      this.data.trainers.push(trainer);
+    } else {
+      trainer.lastActive = new Date().toISOString();
+      if (additionalData.sessionCode) {
+        trainer.totalSessions = (trainer.totalSessions || 0) + 1;
+      }
+      Object.assign(trainer, additionalData);
+    }
+
+    this.save();
+    return trainer;
   }
 
   // --- Student Operations ---

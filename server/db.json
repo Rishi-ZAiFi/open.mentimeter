@@ -582,6 +582,17 @@
       "totalScore": 0,
       "avgAccuracy": 0,
       "history": []
+    },
+    {
+      "id": "stu-1788871778832-tg5e",
+      "phone": "9876500055",
+      "name": "Test Attendee",
+      "createdAt": "2026-09-08T12:49:38.832Z",
+      "updatedAt": "2026-09-08T12:49:38.832Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
     }
   ],
   "sessions": [
@@ -979,6 +990,17 @@
           "responseTimeMs": 2000
         }
       ]
+    }
+  ],
+  "trainers": [
+    {
+      "id": "tr-1788871778812-bidt",
+      "name": "Rishi Bharathi B T",
+      "title": "Technical Trainer",
+      "createdAt": "2026-09-08T12:49:38.812Z",
+      "lastActive": "2026-09-08T12:49:48.034Z",
+      "totalSessions": 4,
+      "sessionCode": "TR-RECON-1"
     }
   ]
 }

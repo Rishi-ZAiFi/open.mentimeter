@@ -223,6 +223,29 @@ app.post('/api/questions', (req, res) => {
   }
 });
 
+// Trainer Profile & Active Sessions Endpoints
+app.get('/api/trainers', (req, res) => {
+  res.json({ success: true, trainers: db.getAllTrainers() });
+});
+
+app.get('/api/active-sessions', (req, res) => {
+  const active = [];
+  sessions.forEach((s) => {
+    active.push({
+      code: s.code,
+      trainerName: s.trainerName,
+      status: s.status,
+      participantsCount: s.participants ? s.participants.length : 0,
+      currentQuestionIndex: s.currentQuestionIndex || 0,
+      totalQuestions: s.questions ? s.questions.length : 20,
+      timerDuration: s.timerDuration || 30,
+      showTopic: s.showTopic || false,
+      speedBonusEnabled: s.speedBonusEnabled !== undefined ? s.speedBonusEnabled : true
+    });
+  });
+  res.json({ success: true, sessions: active });
+});
+
 // Student Profile Endpoints
 app.get('/api/students', (req, res) => {
   res.json(db.getAllStudents());
@@ -364,6 +387,8 @@ io.on('connection', (socket) => {
       sessions.set(code, newSession);
       socket.join(code);
 
+      db.createOrUpdateTrainer(newSession.trainerName, { sessionCode: code });
+
       console.log(`[Session Created] Code: ${code} by ${newSession.trainerName} with ${questionSet.length} questions (ShowTopic: ${newSession.showTopic})`);
 
       if (callback) {
@@ -386,6 +411,70 @@ io.on('connection', (socket) => {
           }
         });
       }
+    } catch (e) {
+      if (callback) callback({ success: false, error: e.message });
+    }
+  });
+
+  // Trainer reconnects to an existing active session
+  socket.on('reconnect_trainer', ({ sessionCode, trainerName }, callback) => {
+    try {
+      const code = (sessionCode || '').toUpperCase().trim();
+      const session = sessions.get(code);
+      if (!session) {
+        return callback && callback({ success: false, error: 'Session not found or is no longer active.' });
+      }
+
+      session.trainerSocketId = socket.id;
+      if (trainerName && trainerName.trim()) {
+        session.trainerName = trainerName.trim();
+        db.createOrUpdateTrainer(session.trainerName, { sessionCode: code });
+      }
+      socket.join(code);
+
+      console.log(`[Trainer Reconnected] Session ${code} reconnected by trainer: ${session.trainerName}`);
+
+      const analytics = calculateSessionAnalytics(session);
+      const currQ = session.questions[session.currentQuestionIndex];
+
+      let answeredCount = 0;
+      session.participants.forEach(p => {
+        if (p.answers[session.currentQuestionIndex] !== undefined) answeredCount++;
+      });
+
+      const participantList = session.participants.map(p => ({
+        id: p.id,
+        name: p.name,
+        phone: p.phone,
+        score: p.score,
+        rank: p.currentRank,
+        connected: p.connected
+      }));
+
+      const payload = {
+        success: true,
+        sessionCode: code,
+        trainerName: session.trainerName,
+        status: session.status,
+        currentQuestionIndex: session.currentQuestionIndex,
+        questionState: session.questionState,
+        timeRemaining: session.timeRemaining,
+        timerDuration: session.timerDuration,
+        speedBonusEnabled: session.speedBonusEnabled,
+        showTopic: session.showTopic !== undefined ? session.showTopic : false,
+        totalQuestions: session.questions.length,
+        participantsCount: session.participants.length,
+        participants: participantList,
+        completedQuestions: session.completedQuestions,
+        currentQuestion: currQ ? { index: session.currentQuestionIndex, total: session.questions.length, ...currQ } : null,
+        liveAnswerCount: {
+          answeredCount,
+          totalParticipants: session.participants.length
+        },
+        analytics
+      };
+
+      if (callback) callback(payload);
     } catch (e) {
       if (callback) callback({ success: false, error: e.message });
     }
