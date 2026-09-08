@@ -615,6 +615,17 @@
       "totalScore": 0,
       "avgAccuracy": 0,
       "history": []
+    },
+    {
+      "id": "stu-1788873757344-jx2x",
+      "phone": "9876500077",
+      "name": "Alice Attendee",
+      "createdAt": "2026-09-08T13:22:37.344Z",
+      "updatedAt": "2026-09-08T13:22:37.344Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
     }
   ],
   "sessions": [
@@ -1106,6 +1117,15 @@
       "lastActive": "2026-09-08T13:05:17.688Z",
       "totalSessions": 4,
       "sessionCode": "DW-9999"
+    },
+    {
+      "id": "tr-1788873757232-nb4p",
+      "name": "Lead Coach",
+      "title": "Technical Trainer",
+      "createdAt": "2026-09-08T13:22:37.232Z",
+      "lastActive": "2026-09-08T13:22:37.232Z",
+      "totalSessions": 1,
+      "sessionCode": "MENTI-4-TEST"
     }
   ]
 }

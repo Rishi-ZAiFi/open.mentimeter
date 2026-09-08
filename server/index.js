@@ -986,7 +986,7 @@ io.on('connection', (socket) => {
   });
 
   // Live Audience Q&A - Submit Question
-  socket.on('submit_qa_question', ({ sessionCode, text, authorName, authorPhone }, callback) => {
+  const handleQASubmit = ({ sessionCode, text, authorName, authorPhone }, callback) => {
     const session = sessions.get(sessionCode);
     if (!session || !text) return callback && callback({ success: false, error: 'Session or text invalid' });
 
@@ -1007,7 +1007,10 @@ io.on('connection', (socket) => {
     io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
 
     if (callback) callback({ success: true, question: newQA });
-  });
+  };
+
+  socket.on('submit_qa_question', handleQASubmit);
+  socket.on('post_qa_question', handleQASubmit);
 
   // Live Audience Q&A - Upvote Question
   socket.on('upvote_qa_question', ({ sessionCode, questionId, userPhone }, callback) => {
@@ -1032,21 +1035,34 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Live Audience Q&A - Toggle Answered
-  socket.on('toggle_qa_answered', ({ sessionCode, questionId }, callback) => {
+  // Live Audience Q&A - Toggle / Mark Answered
+  const handleQAToggleAnswered = ({ sessionCode, questionId, answered }, callback) => {
     const session = sessions.get(sessionCode);
     if (!session || !session.qaQuestions) return callback && callback({ success: false });
 
     const q = session.qaQuestions.find(item => item.id === questionId);
     if (q) {
-      q.answered = !q.answered;
+      q.answered = answered !== undefined ? Boolean(answered) : !q.answered;
       io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
       if (callback) callback({ success: true, answered: q.answered });
     }
+  };
+
+  socket.on('toggle_qa_answered', handleQAToggleAnswered);
+  socket.on('mark_qa_answered', handleQAToggleAnswered);
+
+  // Live Audience Q&A - Delete Question
+  socket.on('delete_qa_question', ({ sessionCode, questionId }, callback) => {
+    const session = sessions.get(sessionCode);
+    if (!session || !session.qaQuestions) return callback && callback({ success: false });
+
+    session.qaQuestions = session.qaQuestions.filter(item => item.id !== questionId);
+    io.to(session.code).emit('qa_questions_updated', { qaQuestions: session.qaQuestions });
+    if (callback) callback({ success: true });
   });
 
   // Live Word Cloud Submission
-  socket.on('submit_word_cloud', ({ sessionCode, word, questionIndex, participantPhone }, callback) => {
+  const handleWordCloudSubmit = ({ sessionCode, word, questionIndex, participantPhone }, callback) => {
     const session = sessions.get(sessionCode);
     if (!session || !word) return callback && callback({ success: false });
 
@@ -1065,14 +1081,25 @@ io.on('connection', (socket) => {
 
     const currentWords = session.wordCloudSubmissions[qIdx];
 
+    // Compute word map frequencies
+    const wordMap = {};
+    currentWords.forEach(w => {
+      const u = w.text.toUpperCase();
+      wordMap[u] = (wordMap[u] || 0) + 1;
+    });
+
     io.to(session.code).emit('word_cloud_updated', {
       questionIndex: qIdx,
       words: currentWords,
+      wordMap,
       totalResponses: currentWords.length
     });
 
-    if (callback) callback({ success: true, words: currentWords });
-  });
+    if (callback) callback({ success: true, words: currentWords, wordMap, totalResponses: currentWords.length });
+  };
+
+  socket.on('submit_word_cloud', handleWordCloudSubmit);
+  socket.on('submit_word', handleWordCloudSubmit);
 
   // Request live session state
   socket.on('get_session_state', ({ sessionCode, participantName, participantPhone, role }, callback) => {

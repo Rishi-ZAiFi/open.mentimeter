@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { soundFX } from '../../services/soundEffects';
-import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck, Volume2, VolumeX, Settings } from 'lucide-react';
+import { soundEngine } from '../../services/soundEffects';
+import { QrCode, Wifi, WifiOff, LogOut, Shield, User, Trash2, Users, UserCheck, Volume2, VolumeX, Settings, MessageSquare } from 'lucide-react';
 import QRCodeModal from './QRCodeModal';
 import StudentProfileModal from '../profile/StudentProfileModal';
 import StudentDirectory from '../trainer/StudentDirectory';
 import TrainerProfileModal from '../trainer/TrainerProfileModal';
+import QAWallModal from './QAWallModal';
+import { FloatingReactionsOverlay } from './FloatingReactions';
 
 export default function Header() {
   const { 
@@ -18,14 +20,16 @@ export default function Header() {
     trainerName,
     participantName,
     participantPhone,
-    setParticipantName
+    setParticipantName,
+    qaQuestions = []
   } = useQuiz();
   
   const [showQrModal, setShowQrModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showDirectoryModal, setShowDirectoryModal] = useState(false);
   const [showTrainerSettings, setShowTrainerSettings] = useState(false);
-  const [isMuted, setIsMuted] = useState(() => soundFX.isMuted());
+  const [showQAWall, setShowQAWall] = useState(false);
+  const [isMuted, setIsMuted] = useState(() => soundEngine.isMuted());
 
   // Status Badge configurations
   const getStatusBadge = () => {
@@ -136,6 +140,23 @@ export default function Header() {
               </button>
             )}
 
+            {/* Live Q&A Wall Trigger */}
+            {sessionCode && (
+              <button
+                onClick={() => setShowQAWall(true)}
+                title="Open Audience Q&A & Doubt Wall"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-600/15 border border-purple-500/30 hover:bg-purple-600/25 text-purple-300 text-xs font-bold transition-colors"
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Q&A</span>
+                {qaQuestions.length > 0 && (
+                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-600 text-white font-mono">
+                    {qaQuestions.length}
+                  </span>
+                )}
+              </button>
+            )}
+
             {/* Live QR Code Trigger */}
             {sessionCode && (
               <button
@@ -150,8 +171,8 @@ export default function Header() {
             {/* Sound FX Toggle */}
             <button
               onClick={() => {
-                soundFX.toggleMute();
-                setIsMuted(soundFX.isMuted());
+                soundEngine.toggleMute();
+                setIsMuted(soundEngine.isMuted());
               }}
               title={isMuted ? "Unmute Audio FX" : "Mute Audio FX"}
               className="p-1.5 sm:p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-colors"
@@ -201,6 +222,9 @@ export default function Header() {
         </div>
       </header>
 
+      {/* Floating Reactions Overlay */}
+      {sessionCode && <FloatingReactionsOverlay isTrainer={role === 'trainer'} />}
+
       {/* Modals */}
       {showQrModal && <QRCodeModal onClose={() => setShowQrModal(false)} />}
       
@@ -225,6 +249,18 @@ export default function Header() {
         <TrainerProfileModal
           isOpen={showTrainerSettings}
           onClose={() => setShowTrainerSettings(false)}
+        />
+      )}
+
+      {showQAWall && (
+        <QAWallModal
+          isOpen={showQAWall}
+          onClose={() => setShowQAWall(false)}
+          qaQuestions={qaQuestions}
+          sessionCode={sessionCode}
+          isTrainer={role === 'trainer'}
+          participantName={participantName}
+          participantPhone={participantPhone}
         />
       )}
     </>

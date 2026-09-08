@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag, UserCheck, RefreshCw, Radio } from 'lucide-react';
+import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag, UserCheck, RefreshCw, Radio, Edit3 } from 'lucide-react';
 import defaultQuestions from '../../data/questions.json';
+import QuestionEditorModal from '../trainer/QuestionEditorModal';
 
 export default function TrainerLogin({ onBack }) {
   const { createSession, reconnectTrainer, errorMessage } = useQuiz();
@@ -13,6 +14,7 @@ export default function TrainerLogin({ onBack }) {
   const [customFileName, setCustomFileName] = useState('');
   const [fileError, setFileError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   // Saved Trainers & Active Sessions
   const [savedTrainers, setSavedTrainers] = useState([]);
@@ -331,10 +333,19 @@ export default function TrainerLogin({ onBack }) {
                 : 'Using Digi Warriors Course 1 – Day 1 question bank.'}
             </p>
 
-            <div className="flex items-center gap-2">
-              <label className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-900 border border-dashed border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white text-xs cursor-pointer transition-colors">
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                type="button"
+                onClick={() => setIsEditorOpen(true)}
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/40 text-xs font-bold transition-colors"
+              >
+                <Edit3 className="w-3.5 h-3.5" />
+                <span>✏️ Visual Slide & Question Editor</span>
+              </button>
+
+              <label className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-900 border border-dashed border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white text-xs cursor-pointer transition-colors">
                 <Upload className="w-3.5 h-3.5" />
-                <span>{customQuestions ? 'Replace Custom JSON' : 'Upload Custom questions.json'}</span>
+                <span>{customQuestions ? 'Replace JSON' : 'Upload JSON'}</span>
                 <input
                   type="file"
                   accept=".json"
@@ -352,7 +363,7 @@ export default function TrainerLogin({ onBack }) {
                   }}
                   className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-rose-500/40 text-xs text-rose-400 transition-colors"
                 >
-                  Reset to Default
+                  Reset
                 </button>
               )}
             </div>
@@ -377,6 +388,19 @@ export default function TrainerLogin({ onBack }) {
         </form>
 
       </div>
+
+      {/* Visual Question Editor Modal */}
+      {isEditorOpen && (
+        <QuestionEditorModal
+          isOpen={isEditorOpen}
+          onClose={() => setIsEditorOpen(false)}
+          initialQuestions={customQuestions || defaultQuestions}
+          onSaveQuestions={(newQuestions) => {
+            setCustomQuestions(newQuestions);
+            setCustomFileName(`Custom (${newQuestions.length} Questions)`);
+          }}
+        />
+      )}
 
     </div>
   );
