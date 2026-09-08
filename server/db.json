@@ -5,7 +5,7 @@
       "phone": "9876500001",
       "name": "Theja Clone",
       "createdAt": "2026-09-08T12:22:15.542Z",
-      "updatedAt": "2026-09-08T13:05:14.195Z",
+      "updatedAt": "2026-09-08T13:26:03.926Z",
       "totalQuizzes": 1,
       "totalScore": 2647,
       "avgAccuracy": 95,
@@ -626,6 +626,28 @@
       "totalScore": 0,
       "avgAccuracy": 0,
       "history": []
+    },
+    {
+      "id": "stu-1788873963013-sm2j",
+      "phone": "9876593044",
+      "name": "Karthik",
+      "createdAt": "2026-09-08T13:26:03.013Z",
+      "updatedAt": "2026-09-08T13:26:03.013Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
+    },
+    {
+      "id": "stu-1788873963030-duvo",
+      "phone": "9876599797",
+      "name": "Meena",
+      "createdAt": "2026-09-08T13:26:03.030Z",
+      "updatedAt": "2026-09-08T13:26:03.030Z",
+      "totalQuizzes": 0,
+      "totalScore": 0,
+      "avgAccuracy": 0,
+      "history": []
     }
   ],
   "sessions": [
@@ -1076,7 +1098,7 @@
       "id": "res-DW-DAY2-stu-1000-1788872716689",
       "studentId": "stu-1000",
       "studentPhone": "9876500001",
-      "studentName": "Theja Clone",
+      "studentName": "Theja Gorrepati (Updated)",
       "sessionCode": "DW-DAY2",
       "quizTitle": "Digi Warriors Technical Assessment",
       "date": "2026-09-08",
@@ -1105,8 +1127,8 @@
       "name": "Rishi Bharathi B T",
       "title": "Technical Trainer",
       "createdAt": "2026-09-08T12:49:38.812Z",
-      "lastActive": "2026-09-08T12:49:48.034Z",
-      "totalSessions": 4,
+      "lastActive": "2026-09-08T13:26:08.386Z",
+      "totalSessions": 6,
       "sessionCode": "TR-RECON-1"
     },
     {
@@ -1114,18 +1136,27 @@
       "name": "Lead Trainer",
       "title": "Technical Trainer",
       "createdAt": "2026-09-08T12:57:14.808Z",
-      "lastActive": "2026-09-08T13:05:17.688Z",
-      "totalSessions": 4,
-      "sessionCode": "DW-9999"
+      "lastActive": "2026-09-08T13:26:03.879Z",
+      "totalSessions": 6,
+      "sessionCode": "DW-DAY2"
     },
     {
       "id": "tr-1788873757232-nb4p",
       "name": "Lead Coach",
       "title": "Technical Trainer",
       "createdAt": "2026-09-08T13:22:37.232Z",
-      "lastActive": "2026-09-08T13:22:37.232Z",
-      "totalSessions": 1,
+      "lastActive": "2026-09-08T13:26:08.947Z",
+      "totalSessions": 3,
       "sessionCode": "MENTI-4-TEST"
+    },
+    {
+      "id": "tr-1788873962997-l4c0",
+      "name": "Coach Dave",
+      "title": "Technical Trainer",
+      "createdAt": "2026-09-08T13:26:02.997Z",
+      "lastActive": "2026-09-08T13:26:02.997Z",
+      "totalSessions": 1,
+      "sessionCode": "DW-RELOAD"
     }
   ]
 }
