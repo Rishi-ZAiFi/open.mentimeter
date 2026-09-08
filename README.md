@@ -1,39 +1,71 @@
+<div align="center">
+
 # OpenMenti
 
-An open-source, local-first interactive polling and assessment platform. Run live quizzes, audience polls, and Q&A sessions over your local network (LAN or Wi-Fi hotspot) with zero cloud dependencies or subscription paywalls.
+**Local-first interactive polling, quizzes, and live audience Q&A.**
+
+An open-source presentation and assessment platform designed to run entirely over local networks with zero cloud dependencies.
+
+</div>
 
 ---
 
-## Overview
+## 📖 About
 
-OpenMenti is designed for classrooms, workshops, and training rooms where internet connectivity is unreliable, restricted, or unavailable. The host machine runs a lightweight local server, and participants connect directly from their mobile or laptop browsers without downloading any apps.
+**OpenMenti** enables educators, trainers, and presenters to host interactive live quizzes, word clouds, polls, and Q&A sessions without relying on an active internet connection.
 
-### Key Highlights
-- **100% Offline & Local-First**: Operates entirely over local Wi-Fi or a mobile hotspot. No external internet connection required.
-- **Real-Time Synchronization**: Instant question delivery, synchronized countdown timers, and live audience response counts via WebSockets.
-- **Audience Engagement**: Interactive Q&A wall with upvoting, live word clouds, and floating reaction emojis.
-- **Presenter Remote (Mentimote)**: Mobile-friendly controller (`?role=remote`) allowing hosts to advance slides, manage timers, and view speaker notes directly from their phone.
-- **Offline Audio**: Web Audio synthesizer for countdown urgency, answer reveals, and leaderboard celebrations.
-- **Participant Profiles & Scoring**: Mobile-number-based participant tracking to prevent duplicate submissions, with optional speed-bonus scoring.
-- **Analytics & Excel Export**: Instant multi-sheet `.xlsx` report generation covering student directories, exam results, and question banks.
-- **Desktop Launcher**: Includes a standalone Windows executable (`DigiWarriors.exe`) for one-click startup without using the terminal.
+The presenter's laptop acts as the local server over standard Wi-Fi, Ethernet, or a mobile hotspot. Participants connect instantly using their browser—no app installations, cloud sign-ins, or subscription tiers required.
 
 ---
 
-## Comparison
+## ✨ Features
 
-| Feature | OpenMenti | Mentimeter | Kahoot |
-| :--- | :---: | :---: | :---: |
-| **Pricing** | Free & Open Source | Subscription / Paid | Subscription / Paid |
-| **Participant Limit** | Hardware bound | 50 (Free tier) | 10–50 (Free tier) |
-| **Internet Required** | No (Local LAN / Hotspot) | Yes | Yes |
-| **Data Hosting** | Local JSON Store | Cloud | Cloud |
-| **Export Formats** | Multi-sheet Excel (.xlsx) | Paid tier | Paid tier |
-| **Mobile Remote Control** | Included | Included | Included |
+- **Local-First & Offline**: Operates seamlessly over local Wi-Fi or mobile hotspots without external internet access.
+- **Instant Synchronization**: Real-time slide broadcast, synchronized timers, and live response charting powered by WebSockets.
+- **Audience Interaction**:
+  - Live multiple-choice quizzes with optional speed bonuses.
+  - Interactive Q&A wall with audience upvoting and moderation.
+  - Real-time word cloud generation and floating live reactions.
+- **Presenter Remote**: Dedicated mobile controller view (`?role=remote`) to manage slides, timers, and speaker notes directly from your phone.
+- **Offline Audio**: Synthesized sound effects for countdowns, reveals, and podium celebrations.
+- **Participant Profiles**: Persistent local scoring and duplicate-submission prevention via participant phone/identifier.
+- **Comprehensive Reports**: Single-click multi-sheet Excel (`.xlsx`) export including participant scorecards, session logs, and question banks.
+- **Windows Launcher**: Standalone executable (`DigiWarriors.exe`) for one-click startup without command-line setup.
 
 ---
 
-## Architecture
+## 🚀 Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- npm
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Rishi-ZAiFi/open.mentimeter.git
+   cd open.mentimeter
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the server**
+   ```bash
+   npm start
+   ```
+
+4. **Open the presenter dashboard**
+   Navigate to `http://localhost:3000` in your web browser.
+
+> **Windows Users:** You can also launch directly by double-clicking `DigiWarriors.exe` or `Start_Digi_Warriors.bat`.
+
+---
+
+## 🔄 How It Works
 
 ```
                      ┌──────────────────────────────┐
@@ -41,125 +73,90 @@ OpenMenti is designed for classrooms, workshops, and training rooms where intern
                      │    http://localhost:3000     │
                      └──────────────┬───────────────┘
                                     │
-                   Local Wi-Fi / Hotspot (No Internet)
+                    Local Wi-Fi / Hotspot / LAN
                                     │
     ┌───────────────────────────────┼───────────────────────────────┐
     ▼                               ▼                               ▼
 ┌──────────────┐             ┌──────────────┐             ┌──────────────┐
-│ Participant 1│             │ Participant 2│             │ Participant N│
+│ Participant  │             │ Participant  │             │ Participant  │
 │ Mobile Phone │             │ Mobile Phone │             │ Laptop / Tab │
 │ 192.168.x:3000             │ 192.168.x:3000             │ 192.168.x:3000
 └──────────────┘             └──────────────┘             └──────────────┘
 ```
 
-1. **Host Starts Session**: Choose timer durations (15s, 30s, 45s, 60s, or untimed), speed bonuses, and category visibility.
-2. **Participants Join**: Scan the on-screen QR code or visit the host IP (e.g., `http://192.168.1.100:3000`) and enter their name and phone number.
-3. **Live Examination & Polls**: Host advances questions; countdown timers and live response charts update across all participant devices synchronously.
-4. **Data Export**: Export complete session logs and scorecards to Excel with one click.
+1. **Host configures session**: Select question timer, category visibility, and scoring options.
+2. **Audience connects**: Participants scan the QR code or visit the displayed local IP address.
+3. **Run assessment**: Advance questions with real-time synchronized responses and leaderboards.
+4. **Export data**: Download full session results directly to Excel.
 
 ---
 
-## Quick Start
+## ⌨️ Presenter Shortcuts
 
-### Option A: Windows Launcher (No Command Line)
-Double-click `DigiWarriors.exe` (or run `Start_Digi_Warriors.bat`). This starts the local server in the background and opens the dashboard in your default browser.
-
-### Option B: Node.js (Windows, macOS, Linux)
-
-#### Prerequisites
-- Node.js (v18 or newer)
-- npm
-
-#### Installation & Setup
-```bash
-# 1. Clone the repository
-git clone https://github.com/Rishi-ZAiFi/open.mentimeter.git
-cd open.mentimeter
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the application
-npm start
-```
-
-Open your browser and navigate to:
-```text
-http://localhost:3000
-```
+| Key | Action |
+| :--- | :--- |
+| `Space` / `→` | Advance to next question / Finish |
+| `R` | Reveal correct answer & distribution |
+| `L` | Toggle leaderboard podium |
+| `P` | Pause / Resume timer |
+| `1` – `9` | Jump directly to question number |
 
 ---
 
-## Custom Question Banks
+## 📁 Custom Question Format
 
-You can use the built-in question bank or load custom questions via JSON from the Trainer Setup screen.
+You can upload custom question banks via JSON directly from the setup dashboard:
 
-### Question Schema (`questions.json`)
 ```json
 [
   {
     "id": 1,
-    "question": "What is the primary function of the INDEX-MATCH formula combination in Excel?",
+    "question": "What is the primary function of INDEX-MATCH in spreadsheet software?",
     "options": [
-      "To perform two-way dynamic lookups with superior flexibility over VLOOKUP",
-      "To calculate the mathematical average of a filtered range",
-      "To concatenate text strings from multiple disjoint cells",
-      "To create 3D pivot charts automatically"
+      "Dynamic two-way lookups across rows and columns",
+      "Calculating mathematical averages of filtered ranges",
+      "Concatenating strings from multiple disjoint cells",
+      "Creating 3D charts automatically"
     ],
     "correctAnswer": 0,
-    "category": "Lookup & Reference",
-    "difficulty": "Advanced",
-    "explanation": "INDEX-MATCH allows lookups in any direction (left or right) and does not break when columns are inserted or deleted."
+    "category": "Data Analysis",
+    "difficulty": "Intermediate",
+    "explanation": "INDEX-MATCH performs flexible lookups in any direction without breaking when columns are shifted."
   }
 ]
 ```
 
 ---
 
-## Presenter Keyboard Shortcuts
+## 🛠️ Tech Stack
 
-| Shortcut | Action |
-| :--- | :--- |
-| `Space` / `→` | Advance to next question / Finish |
-| `R` | Reveal answer & voting breakdown |
-| `L` | Toggle live leaderboard podium |
-| `P` | Pause / Resume timer |
-| `1` – `9` | Jump directly to question number |
+- **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Recharts, Canvas Confetti
+- **Backend**: Node.js, Express, Socket.io
+- **Data & Export**: Local JSON store (`server/db.json`), SheetJS (`xlsx`)
+- **Desktop Launcher**: C# / Windows Forms (`launcher.cs`)
 
 ---
 
-## Tech Stack
+## 🧪 Testing
 
-- **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Canvas Confetti, Recharts
-- **Backend**: Node.js, Express, Socket.io (WebSockets), SheetJS (xlsx)
-- **Data Persistence**: Local JSON store (`server/db.json`)
-- **Desktop Launcher**: Native C# Windows Forms (`launcher.cs` compiled to `DigiWarriors.exe`)
-
----
-
-## Automated Tests
-
-Run the test suites to verify WebSocket synchronization, session recovery, and account persistence:
+Run the included end-to-end verification suites:
 
 ```bash
-# Test multi-session persistent student accounts & Excel export
-node test_persistent_accounts.js
-
-# Test live quiz socket synchronization & answer submissions
+# Verify socket synchronization and submissions
 node test_quiz_flow.js
 
-# Test browser reload state recovery
+# Verify participant accounts & Excel export
+node test_persistent_accounts.js
+
+# Verify state recovery after reload
 node test_reload_flow.js
 
-# Test topic/category visibility toggles
+# Verify category toggle functionality
 node test_topic_toggle.js
-
-# Test persistent trainer profiles & session reconnect
-node test_trainer_profile_flow.js
 ```
 
 ---
 
-## License
+## 📄 License
 
-Distributed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
