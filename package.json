@@ -1,10 +1,10 @@
 {
   "name": "openmenti",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Free, local-first, zero-internet alternative to Mentimeter & Kahoot for live MCQ examinations and real-time assessments.",
   "type": "module",
   "bin": {
-    "openmenti": "./bin/cli.js"
+    "openmenti": "bin/cli.js"
   },
   "files": [
     "bin",
@@ -24,7 +24,7 @@
     "word-cloud",
     "examination-engine"
   ],
-  "author": "Rishi Bharathi B T (ZAiFi)",
+  "author": "rishizaifi",
   "license": "MIT",
   "repository": {
     "type": "git",
