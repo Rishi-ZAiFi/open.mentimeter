@@ -1,112 +1,88 @@
-# ⚡ OpenMenti / AirQuiz — Local-First Real-Time Assessment Engine
+# OpenMenti
 
-<div align="center">
-
-[![Latest Release](https://img.shields.io/badge/Release-v1.0.0--Win64-blueviolet?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Rishi-ZAiFi/open.mentimeter/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
-[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
-[![Socket.io](https://img.shields.io/badge/Socket.io-Real--Time-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io)
-[![Zero Cloud](https://img.shields.io/badge/Zero--Cloud-100%25%20Offline-success?style=for-the-badge)]()
-
-**A free, open-source, local-first alternative to Mentimeter & Kahoot.**  
-*Host high-stakes live MCQ examinations, training assessments, and interactive classroom quizzes without internet, cloud subscriptions, Firebase, or external servers.*
-
-[📦 **Download v1.0.0 (Windows .exe)**](https://github.com/Rishi-ZAiFi/open.mentimeter/releases/latest) • [⚡ Quick Start](#-quick-start) • [✨ Key Features](#-key-features) • [⚖️ Feature Comparison](#-openmenti-vs-mentimeter-vs-kahoot) • [📝 Question Banks](#-custom-question-banks) • [📊 Excel Export](#-master-excel-export)
+An open-source, local-first interactive polling and assessment platform. Run live quizzes, audience polls, and Q&A sessions over your local network (LAN or Wi-Fi hotspot) with zero cloud dependencies or subscription paywalls.
 
 ---
 
-<!-- 🎥 Replace demo.gif with a 10-second screen capture of Trainer screen + Mobile phone joining & voting -->
-<p align="center">
-  <img src="https://raw.githubusercontent.com/your-username/openmenti/main/public/demo-preview.gif" alt="OpenMenti Live Demo Preview" width="850" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);" onerror="this.onerror=null; this.src='https://placehold.co/850x420/1e293b/38bdf8?text=⚡+OpenMenti+Live+Demo+%7C+Zero-Cloud+Classroom+Engine';">
-</p>
+## Overview
 
-</div>
+OpenMenti is designed for classrooms, workshops, and training rooms where internet connectivity is unreliable, restricted, or unavailable. The host machine runs a lightweight local server, and participants connect directly from their mobile or laptop browsers without downloading any apps.
+
+### Key Highlights
+- **100% Offline & Local-First**: Operates entirely over local Wi-Fi or a mobile hotspot. No external internet connection required.
+- **Real-Time Synchronization**: Instant question delivery, synchronized countdown timers, and live audience response counts via WebSockets.
+- **Audience Engagement**: Interactive Q&A wall with upvoting, live word clouds, and floating reaction emojis.
+- **Presenter Remote (Mentimote)**: Mobile-friendly controller (`?role=remote`) allowing hosts to advance slides, manage timers, and view speaker notes directly from their phone.
+- **Offline Audio**: Web Audio synthesizer for countdown urgency, answer reveals, and leaderboard celebrations.
+- **Participant Profiles & Scoring**: Mobile-number-based participant tracking to prevent duplicate submissions, with optional speed-bonus scoring.
+- **Analytics & Excel Export**: Instant multi-sheet `.xlsx` report generation covering student directories, exam results, and question banks.
+- **Desktop Launcher**: Includes a standalone Windows executable (`DigiWarriors.exe`) for one-click startup without using the terminal.
 
 ---
 
-## ⚖️ OpenMenti vs Mentimeter vs Kahoot
+## Comparison
 
-| Feature | ⚡ **OpenMenti / DigiWarriors** | 🟣 Mentimeter | 🟢 Kahoot |
+| Feature | OpenMenti | Mentimeter | Kahoot |
 | :--- | :---: | :---: | :---: |
-| **Pricing** | **100% Free & Open Source** | $12–$25 / month | $17–$60 / month |
-| **Participant Limit** | **Unlimited** (Hardware bound) | 50 (Free tier) | 10–50 (Free tier) |
-| **Internet Required?** | ❌ **Zero (Runs on local Hotspot/LAN)** | ✅ Requires Internet | ✅ Requires Internet |
-| **Data Privacy** | 🔒 **100% On-Premises / Local JSON** | Cloud Hosted | Cloud Hosted |
-| **Latency** | ⚡ **Sub-millisecond Local WebSockets** | 200–800ms Cloud | 200–800ms Cloud |
-| **Standalone Desktop App** | ✅ **Native Windows `.exe` included** | ❌ Web Only | ❌ Web Only |
-| **Student History & Profiles** | ✅ **Built-in Student Directory & Marks** | Paid Tier | Paid Tier |
-| **Master Excel Export (.xlsx)** | ✅ **Multi-sheet automated workbook** | Paid Tier | Paid Tier |
+| **Pricing** | Free & Open Source | Subscription / Paid | Subscription / Paid |
+| **Participant Limit** | Hardware bound | 50 (Free tier) | 10–50 (Free tier) |
+| **Internet Required** | No (Local LAN / Hotspot) | Yes | Yes |
+| **Data Hosting** | Local JSON Store | Cloud | Cloud |
+| **Export Formats** | Multi-sheet Excel (.xlsx) | Paid tier | Paid tier |
+| **Mobile Remote Control** | Included | Included | Included |
 
 ---
 
-## 💡 Why This Exists
+## Architecture
 
-Commercial tools like Mentimeter, Kahoot, Slido, and Quizizz are great—until you face:
-- ❌ **Spotty or restricted internet** in exam halls, corporate training rooms, or rural centers.
-- ❌ **Expensive paywalls** and strict participant limits ($15–$50+/month).
-- ❌ **Cloud latency & privacy concerns** transmitting student data to third-party cloud servers.
-
-**OpenMenti / AirQuiz** solves this by running a high-performance **local WebSocket server** directly from your laptop. 
-- Participants simply connect to your laptop's **Wi-Fi hotspot or local LAN** from their phone/laptop browser.
-- **Zero internet connection required.** Everything runs at sub-millisecond local network speeds.
-
----
-
-## ✨ Key Features
-
-| Feature | Description |
-| :--- | :--- |
-| 📴 **100% Local-First & Offline** | Air-gapped operation. Run assessments in basements, auditoriums, or off-grid classrooms. |
-| ⚡ **Sub-Millisecond Live Sync** | Real-time question broadcasting, synchronized timers, and live response counters powered by WebSockets. |
-| 🎈 **Live Floating Emoji Reactions** | Physics-animated emoji streams (`❤️`, `🔥`, `👍`, `🎉`) floating up the big screen in real-time. |
-| 📱 **Mentimote Mobile Remote** | Dedicated phone controller (`?role=remote`) allowing trainers to control slides, timers, and view speaker notes on the move. |
-| 💬 **Live Audience Q&A + Upvoting** | Real-time question submission drawer with peer upvoting and trainer moderation. |
-| ☁️ **Dynamic Word Cloud Slides** | Dynamic animated SVG word cloud with live frequency scaling and custom color palettes. |
-| 🎵 **Web Audio Sound Synthesizer** | 100% offline sound effects for countdown urgency, correct/incorrect chimes, drumrolls, and victory fanfares. |
-| 🏎️ **Speed-Bonus Scoring** | Adaptive scoring: 100 base points for correct answers + up to 50 bonus points for lightning-fast responses. |
-| 👤 **Persistent Accounts & Anti-Duplicate** | Mobile number-based participant tracking. Prevents duplicate votes and tracks multi-exam student progress across days. |
-| 📈 **Student Performance Profiles & Report Cards** | Detailed personal report cards with rank badges, speed metrics, accuracy graphs, and print action. |
-| 📊 **Live Distribution & Explanations** | Beautiful animated bar charts showing cohort answer choices, correct answers, and rich technical explanations. |
-| 🏷️ **Trainer Category Toggle** | Toggle question topic/category hints (e.g., *Formulas, Pivot Tables*) on or off to avoid giving premature hints. |
-| 📑 **Master Excel Export (.xlsx)** | Single-click export producing multi-sheet Excel reports with student directories, marks logs, and question banks. |
-| 🖥️ **Native Windows Executable** | Includes a standalone `DigiWarriors.exe` launcher with embedded icon and control dashboard. |
-
----
-
-## 🚀 Quick Start
-
-### Option A: One-Click Windows Launcher (No Command Line)
-If you are on Windows, simply double-click:
-```bash
-DigiWarriors.exe
 ```
-*(or run `Start_Digi_Warriors.bat`)*
+                     ┌──────────────────────────────┐
+                     │     Host Laptop (Server)     │
+                     │    http://localhost:3000     │
+                     └──────────────┬───────────────┘
+                                    │
+                   Local Wi-Fi / Hotspot (No Internet)
+                                    │
+    ┌───────────────────────────────┼───────────────────────────────┐
+    ▼                               ▼                               ▼
+┌──────────────┐             ┌──────────────┐             ┌──────────────┐
+│ Participant 1│             │ Participant 2│             │ Participant N│
+│ Mobile Phone │             │ Mobile Phone │             │ Laptop / Tab │
+│ 192.168.x:3000             │ 192.168.x:3000             │ 192.168.x:3000
+└──────────────┘             └──────────────┘             └──────────────┘
+```
 
-This will automatically launch the local engine in the background and open your default browser to `http://localhost:3000`.
+1. **Host Starts Session**: Choose timer durations (15s, 30s, 45s, 60s, or untimed), speed bonuses, and category visibility.
+2. **Participants Join**: Scan the on-screen QR code or visit the host IP (e.g., `http://192.168.1.100:3000`) and enter their name and phone number.
+3. **Live Examination & Polls**: Host advances questions; countdown timers and live response charts update across all participant devices synchronously.
+4. **Data Export**: Export complete session logs and scorecards to Excel with one click.
 
 ---
 
-### Option B: Node.js (Cross-Platform: Windows, macOS, Linux)
+## Quick Start
 
-#### 1. Clone the repository
+### Option A: Windows Launcher (No Command Line)
+Double-click `DigiWarriors.exe` (or run `Start_Digi_Warriors.bat`). This starts the local server in the background and opens the dashboard in your default browser.
+
+### Option B: Node.js (Windows, macOS, Linux)
+
+#### Prerequisites
+- Node.js (v18 or newer)
+- npm
+
+#### Installation & Setup
 ```bash
+# 1. Clone the repository
 git clone https://github.com/Rishi-ZAiFi/open.mentimeter.git
-cd openmenti
-```
+cd open.mentimeter
 
-#### 2. Install dependencies
-```bash
+# 2. Install dependencies
 npm install
-```
 
-#### 3. Start the application
-```bash
-# Start the full stack (Vite frontend + Express/Socket.io backend)
+# 3. Start the application
 npm start
 ```
 
-#### 4. Open the Trainer Dashboard
 Open your browser and navigate to:
 ```text
 http://localhost:3000
@@ -114,42 +90,11 @@ http://localhost:3000
 
 ---
 
-## 📡 How It Works in a Live Classroom
+## Custom Question Banks
 
-```
-                        ┌──────────────────────────────┐
-                        │   Trainer Laptop (Server)    │
-                        │    http://localhost:3000     │
-                        └──────────────┬───────────────┘
-                                       │
-                      Local Wi-Fi / Hotspot (No Internet)
-                                       │
-       ┌───────────────────────────────┼───────────────────────────────┐
-       ▼                               ▼                               ▼
-┌──────────────┐                ┌──────────────┐                ┌──────────────┐
-│  Student 1   │                │  Student 2   │                │  Student N   │
-│ Mobile Phone │                │ Mobile Phone │                │ Laptop / Tab │
-│ 192.168.x:3000                │ 192.168.x:3000                │ 192.168.x:3000
-└──────────────┘                └──────────────┘                └──────────────┘
-```
+You can use the built-in question bank or load custom questions via JSON from the Trainer Setup screen.
 
-1. **Trainer creates a session**: Choose question timer (15s, 30s, 45s, 60s, or untimed), speed bonus option, and topic visibility.
-2. **Trainer shares the join URL / QR code**: Display the big PIN screen (e.g. `http://192.168.1.100:3000` with session code `DW-7764`).
-3. **Participants enter Mobile Number & Name**: Instant enrollment with duplicate prevention.
-4. **Live Examination**:
-   - Trainer controls question progression (`Space` or `Next Question`).
-   - Timers tick down simultaneously across all participant screens.
-   - When time expires or trainer clicks **Reveal**, all screens show option distribution & correct answers.
-   - Live Leaderboard with animated podium ranking is revealed.
-5. **Instant Export**: Trainer clicks **Export Excel** to download the master spreadsheet.
-
----
-
-## 📝 Custom Question Banks
-
-You can use the built-in 20-question technical question bank or upload your own custom JSON file from the **Trainer Setup** screen.
-
-### Question JSON Schema (`questions.json`):
+### Question Schema (`questions.json`)
 ```json
 [
   {
@@ -171,41 +116,30 @@ You can use the built-in 20-question technical question bank or upload your own 
 
 ---
 
-## 📊 Master Excel Export
-
-Download comprehensive multi-sheet Excel reports (`.xlsx`) at any time via `/api/export-master` or through the UI:
-
-- **Sheet 1 — Student Directory & Cumulative Performance**: Student IDs, mobile numbers, total quizzes attempted, cumulative marks, and average accuracy.
-- **Sheet 2 — Exam Results Log**: Chronological attempt log with timestamps, session codes, ranks, and exact scores.
-- **Sheet 3 — Sessions Log**: Complete archive of all past conducted quiz sessions.
-- **Sheet 4 — Active Question Bank**: Complete record of questions, option distributions, and explanations.
-
----
-
-## ⌨️ Trainer Keyboard Shortcuts
+## Presenter Keyboard Shortcuts
 
 | Shortcut | Action |
 | :--- | :--- |
-| `Space` / `→` | Advance to Next Question / Finish |
-| `R` | Reveal Answer & Option Distribution |
-| `L` | Toggle Live Leaderboard Podium |
-| `P` | Pause / Resume Quiz Timer |
-| `1` – `9` | Jump directly to Question number |
+| `Space` / `→` | Advance to next question / Finish |
+| `R` | Reveal answer & voting breakdown |
+| `L` | Toggle live leaderboard podium |
+| `P` | Pause / Resume timer |
+| `1` – `9` | Jump directly to question number |
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack
 
-- **Frontend**: [React 18](https://react.dev/), [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com/), [Lucide Icons](https://lucide.dev/), [Canvas-Confetti](https://www.npmjs.com/package/canvas-confetti), [Recharts](https://recharts.org/)
-- **Backend**: [Node.js](https://nodejs.org/), [Express](https://expressjs.com/), [Socket.io](https://socket.io/) (WebSockets), [SheetJS (xlsx)](https://sheetjs.com/)
-- **Storage**: Local JSON database (`server/db.json`) with ACID-like atomic writes and multi-session historical timeline tracking.
-- **Desktop Launcher**: Native C# Windows Forms Launcher (`launcher.cs` compiled to `DigiWarriors.exe`).
+- **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Canvas Confetti, Recharts
+- **Backend**: Node.js, Express, Socket.io (WebSockets), SheetJS (xlsx)
+- **Data Persistence**: Local JSON store (`server/db.json`)
+- **Desktop Launcher**: Native C# Windows Forms (`launcher.cs` compiled to `DigiWarriors.exe`)
 
 ---
 
-## 🧪 Testing
+## Automated Tests
 
-The repository includes end-to-end automated test suites for live socket connections, mobile accounts, state synchronization, and topic toggles:
+Run the test suites to verify WebSocket synchronization, session recovery, and account persistence:
 
 ```bash
 # Test multi-session persistent student accounts & Excel export
@@ -220,30 +154,12 @@ node test_reload_flow.js
 # Test topic/category visibility toggles
 node test_topic_toggle.js
 
-# Test persistent trainer profiles & instant session reconnect
+# Test persistent trainer profiles & session reconnect
 node test_trainer_profile_flow.js
 ```
 
 ---
 
-## 🤝 Contributing
+## License
 
-Contributions, bug reports, and feature suggestions are warmly welcome!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
-
----
-
-<div align="center">
-  <sub>Built with ❤️ for trainers, teachers, and developers who value privacy, speed, and offline reliability.</sub>
-</div>
+Distributed under the [MIT License](LICENSE).
