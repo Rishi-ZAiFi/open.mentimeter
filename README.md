@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenMenti
+# open.mentimeter
 
 **Open source Mentimeter alternative.**
 
@@ -12,7 +12,7 @@ A local-first presentation and live assessment platform designed to run entirely
 
 ## 📖 About
 
-**OpenMenti** enables educators, trainers, and presenters to host interactive live quizzes, word clouds, polls, and Q&A sessions without relying on an active internet connection.
+**open.mentimeter** enables educators, trainers, and presenters to host interactive live quizzes, word clouds, polls, and Q&A sessions without relying on an active internet connection.
 
 The presenter's laptop acts as the local server over standard Wi-Fi, Ethernet, or a mobile hotspot. Participants connect instantly using their browser—no app installations, cloud sign-ins, or subscription tiers required.
 
