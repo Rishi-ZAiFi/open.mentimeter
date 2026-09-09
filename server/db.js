@@ -176,6 +176,19 @@ class Database {
     return trainer;
   }
 
+  deleteTrainer(idOrName) {
+    if (!idOrName) return false;
+    if (!this.data.trainers) this.data.trainers = [];
+    const clean = idOrName.toLowerCase().trim();
+    const initialLen = this.data.trainers.length;
+    this.data.trainers = this.data.trainers.filter(t => t.id !== idOrName && t.name.toLowerCase().trim() !== clean);
+    if (this.data.trainers.length !== initialLen) {
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
   // --- Student Operations ---
   findStudentByPhone(phone) {
     if (!phone) return null;
