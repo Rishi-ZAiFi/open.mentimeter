@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuiz } from '../../context/QuizContext';
-import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag, UserCheck, RefreshCw, Radio, Edit3 } from 'lucide-react';
+import { Presentation, Clock, Zap, ArrowLeft, ArrowRight, Upload, CheckCircle2, FileText, AlertCircle, Tag, UserCheck, RefreshCw, Radio, Edit3, X } from 'lucide-react';
 import defaultQuestions from '../../data/questions.json';
 import QuestionEditorModal from '../trainer/QuestionEditorModal';
 
@@ -89,6 +89,22 @@ export default function TrainerLogin({ onBack }) {
     }, () => {
       setReconnectingCode(null);
     });
+  };
+
+  const handleDeleteTrainer = async (e, trainer) => {
+    e.stopPropagation();
+    try {
+      const res = await fetch(`/api/trainers/${encodeURIComponent(trainer.id || trainer.name)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data && data.trainers) {
+        setSavedTrainers(data.trainers);
+        if (name.trim().toLowerCase() === trainer.name.toLowerCase()) {
+          setName(data.trainers.length > 0 ? data.trainers[0].name : '');
+        }
+      }
+    } catch (err) {
+      console.error('Failed to delete trainer profile:', err);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -200,13 +216,12 @@ export default function TrainerLogin({ onBack }) {
               </label>
               <div className="flex items-center gap-2 flex-wrap">
                 {savedTrainers.map((t) => (
-                  <button
+                  <div
                     key={t.id || t.name}
-                    type="button"
                     onClick={() => setName(t.name)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 ${
+                    className={`group cursor-pointer px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 select-none ${
                       name.trim().toLowerCase() === t.name.toLowerCase()
-                        ? 'bg-blue-600/30 text-blue-300 border-blue-500/60 ring-1 ring-blue-500/50'
+                        ? 'bg-blue-600/30 text-blue-300 border-blue-500/60 ring-1 ring-blue-500/50 shadow-md shadow-blue-500/10'
                         : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700 hover:text-white'
                     }`}
                   >
@@ -217,7 +232,15 @@ export default function TrainerLogin({ onBack }) {
                         {t.totalSessions} sessions
                       </span>
                     )}
-                  </button>
+                    <button
+                      type="button"
+                      title="Remove profile"
+                      onClick={(e) => handleDeleteTrainer(e, t)}
+                      className="ml-1 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 p-0.5 rounded transition-all opacity-70 group-hover:opacity-100"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>

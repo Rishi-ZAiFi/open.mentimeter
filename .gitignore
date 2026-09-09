@@ -16,7 +16,6 @@ dist-ssr/
 *.local
 
 # Editor directories
-.vscode/
 .idea/
 *.suo
 *.ntvs*
@@ -35,3 +34,7 @@ Digi_Warriors_Exam_Results_*.xlsx
 Digi_Warriors_Marks_*.csv
 Digi_Warriors_Questions_*.csv
 Digi_Warriors_Student_Responses_*.csv
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
