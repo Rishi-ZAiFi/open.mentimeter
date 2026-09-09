@@ -228,6 +228,11 @@ app.get('/api/trainers', (req, res) => {
   res.json({ success: true, trainers: db.getAllTrainers() });
 });
 
+app.delete('/api/trainers/:id', (req, res) => {
+  const deleted = db.deleteTrainer(req.params.id);
+  res.json({ success: deleted, trainers: db.getAllTrainers() });
+});
+
 app.get('/api/active-sessions', (req, res) => {
   const active = [];
   sessions.forEach((s) => {
