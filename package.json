@@ -32,11 +32,11 @@
   },
   "homepage": "https://github.com/Rishi-ZAiFi/open.mentimeter#readme",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node init && vite",
+    "build": "node init && vite build",
     "preview": "vite preview",
     "server": "node server/index.js",
-    "start": "node server/index.js",
+    "start": "node init && node server/index.js",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
